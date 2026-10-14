@@ -1,0 +1,872 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0c0b09">
+<meta property="og:title" content="HKNS Events">
+<meta property="og:description" content="Luxury wedding and event décor in Addison, Illinois.">
+<meta property="og:image" content="images/ivory-floral-arch-1600.webp">
+<title>HKNS Events</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="HKNS Events is a luxury wedding and event décor studio in Addison, Illinois. Bespoke stages, mandaps, floral walls, draping and tablescapes for celebrations of every culture and faith.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400;1,6..96,500&family=Jost:wght@300;400;500&display=swap">
+<style>
+/* Layout: one dark gallery night. A pinned 3D hall opens the page, then long editorial bands with a 12-column grid and hairline gold rules. */
+:root{
+  --ink:#0c0b09;
+  --ink-2:#14120e;
+  --ink-3:#1d1a14;
+  --ivory:#f2ebdf;
+  --mist:#cfc6b6;
+  --gold:#c8a46a;
+  --gold-hi:#e7d2a4;
+  --rule:rgba(200,164,106,.22);
+  --display:"Bodoni Moda","Didot","Bodoni 72",Georgia,serif;
+  --body:"Jost","Futura","Avenir Next","Helvetica Neue",Arial,sans-serif;
+  --gutter:max(clamp(20px,4.5vw,64px),env(safe-area-inset-left,0px));
+  --gutter-r:max(clamp(20px,4.5vw,64px),env(safe-area-inset-right,0px));
+  --wrap:1240px;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{background:var(--ink)}
+body{margin:0;background:var(--ink);color:var(--ivory);font-family:var(--body);font-weight:400;font-size:18px;line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:inherit}
+::selection{background:var(--gold);color:var(--ink)}
+:focus-visible{outline:1px solid var(--gold-hi);outline-offset:4px}
+.wrap{max-width:var(--wrap);margin:0 auto;padding-left:var(--gutter);padding-right:var(--gutter-r)}
+.eyebrow{font-family:var(--body);font-size:13px;font-weight:500;letter-spacing:.28em;text-transform:uppercase;color:var(--gold)}
+h1,h2,h3{font-family:var(--display);font-weight:400;margin:0;text-wrap:balance;letter-spacing:-.01em}
+h2{font-size:clamp(38px,5.6vw,76px);line-height:1.02}
+h2 em,h1 em{font-style:italic;color:var(--gold-hi)}
+p{margin:0}
+.btn{display:inline-flex;align-items:center;gap:12px;padding:16px 28px;border:1px solid var(--gold);color:var(--ivory);text-decoration:none;font-size:13px;letter-spacing:.22em;text-transform:uppercase;font-weight:500;background:transparent;cursor:pointer;font-family:var(--body);transition:background .4s,color .4s}
+.btn:hover{background:var(--gold);color:var(--ink)}
+.btn.solid{background:var(--gold);color:var(--ink)}
+.btn.solid:hover{background:var(--gold-hi)}
+.link{font-size:13px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;text-decoration:none;border-bottom:1px solid var(--rule);padding-bottom:4px;transition:border-color .3s,color .3s}
+.link:hover{border-color:var(--gold);color:var(--gold-hi)}
+
+/* nav */
+.nav{position:fixed;top:0;left:0;right:0;z-index:50;padding-top:calc(18px + env(safe-area-inset-top,0px));padding-bottom:18px;transition:background .5s,backdrop-filter .5s}
+.nav.scrolled{background:rgba(12,11,9,.78);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--rule)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:24px}
+.mark{text-decoration:none;display:flex;flex-direction:column;line-height:1}
+.mark b{font-family:var(--display);font-weight:500;font-size:28px;letter-spacing:.14em}
+.mark span{font-size:10px;font-weight:500;letter-spacing:.62em;color:var(--gold);margin-top:5px;padding-left:2px}
+.nav ul{display:flex;gap:34px;list-style:none;margin:0;padding:0}
+.nav ul a{text-decoration:none;font-size:13px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--ivory);opacity:.82;transition:color .3s}
+.nav ul a:hover{opacity:1;color:var(--gold-hi)}
+.nav .btn{padding:12px 20px;font-size:12px}
+.menu-btn{display:none;background:none;border:0;color:var(--ivory);font-family:var(--body);font-size:12px;letter-spacing:.22em;text-transform:uppercase;cursor:pointer;padding:8px 0}
+.drawer{position:fixed;inset:0;z-index:60;background:var(--ink);display:flex;flex-direction:column;justify-content:center;gap:10px;padding:max(24px,env(safe-area-inset-top,0px)) var(--gutter-r) 24px var(--gutter)}
+.drawer a{font-family:var(--display);font-size:40px;text-decoration:none;line-height:1.3}
+.drawer button{position:absolute;top:calc(22px + env(safe-area-inset-top,0px));right:var(--gutter-r)}
+@media (max-width:900px){.nav ul,.nav .btn{display:none}.menu-btn{display:block}}
+
+/* hero */
+.hero{position:relative;height:300vh}
+.stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:radial-gradient(120% 80% at 50% 70%,#1b1710 0%,var(--ink) 60%)}
+#hall{position:absolute;inset:0;width:100%;height:100%;display:block}
+.stage::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(12,11,9,.5) 0%,rgba(12,11,9,0) 18%,rgba(12,11,9,0) 60%,rgba(12,11,9,.7) 100%),radial-gradient(60% 55% at 18% 78%,rgba(12,11,9,.72),rgba(12,11,9,0))}
+.hotspots{position:absolute;inset:0;z-index:1;pointer-events:none;overflow:hidden}
+.hs{position:absolute;left:0;top:0;opacity:0;will-change:transform,opacity}
+.hs i{position:absolute;left:-5px;top:-5px;width:10px;height:10px;border-radius:50%;border:1px solid var(--gold-hi);background:rgba(200,164,106,.35);box-shadow:0 0 14px rgba(231,210,164,.6)}
+.hs span{position:absolute;left:16px;top:-14px;white-space:nowrap;font-size:12px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--ivory);padding:6px 11px;background:rgba(12,11,9,.6);border:1px solid var(--rule);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.hs.flip span{left:auto;right:16px}
+.hero-copy{position:absolute;left:0;right:0;bottom:clamp(28px,8vh,90px);z-index:2}
+.hero-copy .wrap{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:32px}
+.hero h1{font-size:clamp(48px,7.6vw,124px);line-height:.92;letter-spacing:-.025em}
+.hero .lede{max-width:460px;color:var(--ivory);margin-top:22px;font-size:19px;text-shadow:0 1px 18px rgba(12,11,9,.9)}
+.hero .ctas{display:flex;gap:22px;align-items:center;margin-top:30px;flex-wrap:wrap}
+.hero-top{position:absolute;z-index:2;left:0;right:0;top:calc(110px + env(safe-area-inset-top,0px))}
+.hero-top .wrap{display:flex;justify-content:space-between;align-items:center;gap:20px}
+.chapters{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px;min-width:220px}
+.chapters li{display:grid;grid-template-columns:44px 1fr;gap:12px;align-items:baseline;color:var(--mist);transition:color .5s}
+.chapters li .n{font-family:var(--display);font-style:italic;font-size:15px;color:var(--gold);opacity:.55;transition:opacity .5s}
+.chapters li .t{font-size:13px;font-weight:500;letter-spacing:.24em;text-transform:uppercase}
+.chapters li .d{grid-column:2;font-size:15px;line-height:1.5;max-height:0;overflow:hidden;opacity:0;transition:max-height .6s,opacity .6s;max-width:260px}
+.chapters li.on{color:var(--ivory)}
+.chapters li.on .n{opacity:1}
+.chapters li.on .d{max-height:90px;opacity:1}
+.scroll-cue{font-size:12px;font-weight:500;letter-spacing:.28em;text-transform:uppercase;color:var(--mist);display:flex;align-items:center;gap:12px}
+.scroll-cue i{display:block;width:44px;height:1px;background:var(--gold);transform-origin:left;animation:cue 2.4s ease-in-out infinite}
+@keyframes cue{0%{transform:scaleX(0)}50%{transform:scaleX(1)}100%{transform:scaleX(0);transform-origin:right}}
+@media (max-width:900px){
+  .hero{height:240vh}
+  .hero-copy .wrap{grid-template-columns:1fr}
+  .chapters{display:none}
+  .scroll-cue{display:none}
+}
+
+/* marquee */
+.marquee{border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);overflow:hidden;padding-block:22px;background:var(--ink)}
+.marquee .track{display:flex;width:max-content;animation:slide 48s linear infinite}
+.marquee span{font-family:var(--display);font-style:italic;font-size:clamp(22px,2.6vw,34px);color:var(--ivory);padding:0 28px;white-space:nowrap;display:flex;align-items:center;gap:56px}
+.marquee span::after{content:"";width:7px;height:7px;transform:rotate(45deg);border:1px solid var(--gold)}
+@keyframes slide{to{transform:translateX(-50%)}}
+
+/* sections */
+section.band{padding-block:clamp(90px,13vw,170px)}
+.about .wrap{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:28px}
+.about .eyebrow{grid-column:1/-1}
+.about h2{grid-column:1/9}
+.about .copy{grid-column:7/13;display:flex;flex-direction:column;gap:20px;color:var(--mist);margin-top:30px;max-width:560px}
+.about .copy strong{color:var(--ivory);font-weight:400}
+.stats{grid-column:1/-1;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin-top:70px;border-top:1px solid var(--rule)}
+.stats div{padding:26px 22px 0 0;display:flex;flex-direction:column;gap:6px;min-width:0}
+.stats div+div{padding-left:22px;border-left:1px solid var(--rule)}
+.stats b{font-family:var(--display);font-weight:400;font-size:clamp(34px,4vw,54px);line-height:1;color:var(--gold-hi);font-variant-numeric:lining-nums}
+.stats span{font-size:15px;color:var(--mist);letter-spacing:.04em}
+@media (max-width:900px){
+  .about h2,.about .copy{grid-column:1/-1}
+  .about .copy{margin-top:0}
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .stats div:nth-child(3){padding-left:0;border-left:0}
+  .stats div:nth-child(n+3){margin-top:26px;border-top:1px solid var(--rule)}
+}
+
+/* work */
+.work .head{display:flex;justify-content:space-between;align-items:end;gap:30px;flex-wrap:wrap;margin-bottom:56px}
+.grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));grid-auto-rows:clamp(240px,34vw,500px);gap:18px}
+.tile{position:relative;margin:0;overflow:hidden;cursor:zoom-in;background:var(--ink-2);border:0;padding:0;color:inherit;text-align:left;font:inherit}
+.tile img{width:100%;height:100%;object-fit:cover;transform:scale(1.04);transition:transform 1.4s cubic-bezier(.2,.7,.2,1),filter 1s;filter:saturate(.92)}
+.tile:hover img{transform:scale(1.0);filter:saturate(1.05)}
+.tile figcaption{position:absolute;left:0;right:0;bottom:0;padding:60px 22px 20px;background:linear-gradient(transparent,rgba(12,11,9,.82));display:flex;justify-content:space-between;align-items:end;gap:16px}
+.tile figcaption b{font-family:var(--display);font-weight:400;font-size:clamp(20px,2vw,28px);line-height:1.1}
+.tile figcaption span{font-size:12px;font-weight:500;letter-spacing:.24em;text-transform:uppercase;color:var(--gold-hi);white-space:nowrap}
+.s7{grid-column:span 7}.s5{grid-column:span 5}.s4{grid-column:span 4}.s8{grid-column:span 8}.s6{grid-column:span 6}
+@media (max-width:760px){
+  .grid{grid-template-columns:1fr;grid-auto-rows:auto}
+  .tile{grid-column:1/-1;aspect-ratio:4/3}
+  .tile figcaption{flex-direction:column;align-items:flex-start;gap:6px}
+}
+
+/* lightbox */
+.lightbox{position:fixed;inset:0;z-index:80;background:rgba(8,7,6,.96);display:grid;grid-template-rows:1fr auto;padding:calc(20px + env(safe-area-inset-top,0px)) var(--gutter-r) calc(20px + env(safe-area-inset-bottom,0px)) var(--gutter)}
+.lightbox img{max-height:100%;max-width:100%;margin:auto;object-fit:contain}
+.lightbox .bar{display:flex;justify-content:space-between;align-items:center;gap:16px;padding-top:16px}
+.lightbox .bar b{font-family:var(--display);font-weight:400;font-size:22px}
+.lightbox .ctl{display:flex;gap:10px}
+.lightbox button{background:none;border:1px solid var(--rule);color:var(--ivory);font-family:var(--body);font-size:11px;letter-spacing:.22em;text-transform:uppercase;padding:10px 16px;cursor:pointer}
+.lightbox button:hover{border-color:var(--gold)}
+
+/* film */
+.film{position:relative;min-height:clamp(480px,82vh,900px);display:flex;align-items:flex-end;overflow:hidden;background:var(--ink-2)}
+.film .poster,.film .yt{position:absolute;inset:0}
+.film .poster img{width:100%;height:100%;object-fit:cover;filter:brightness(.4) contrast(1.15) saturate(.9)}
+.film .yt{overflow:hidden;pointer-events:none;opacity:0;transition:opacity 1.6s}
+.film .yt.ready{opacity:1}
+.film .yt iframe{position:absolute;top:50%;left:50%;width:max(100%,177.78vh);height:max(100%,56.25vw);min-height:100%;transform:translate(-50%,-50%) scale(1.08);border:0}
+.film::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,11,9,.3),rgba(12,11,9,.15) 40%,rgba(12,11,9,.88));pointer-events:none}
+.film .wrap{position:relative;z-index:2;width:100%;padding-block:clamp(40px,7vw,90px);display:flex;justify-content:space-between;align-items:end;gap:28px;flex-wrap:wrap}
+.film h2{max-width:760px}
+.play{display:inline-flex;align-items:center;gap:16px;text-decoration:none;font-size:12px;letter-spacing:.24em;text-transform:uppercase}
+.play i{width:64px;height:64px;border-radius:50%;border:1px solid var(--gold);display:grid;place-items:center;transition:background .4s}
+.play i::before{content:"";border-left:13px solid var(--gold-hi);border-top:8px solid transparent;border-bottom:8px solid transparent;margin-left:4px}
+.play:hover i{background:rgba(200,164,106,.18)}
+
+/* process */
+.process .wrap{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:28px}
+.process .intro{grid-column:1/6;position:sticky;top:120px;align-self:start;display:flex;flex-direction:column;gap:22px}
+.process .intro p{color:var(--mist);max-width:420px}
+.steps{grid-column:7/13;list-style:none;margin:0;padding:0}
+.steps li{display:grid;grid-template-columns:70px minmax(0,1fr);gap:10px;padding:34px 0;border-top:1px solid var(--rule)}
+.steps li:last-child{border-bottom:1px solid var(--rule)}
+.steps .n{font-family:var(--display);font-style:italic;font-size:22px;color:var(--gold)}
+.steps h3{font-size:clamp(26px,2.6vw,36px);line-height:1.1;margin-bottom:10px}
+.steps p{color:var(--mist);max-width:480px}
+.perks{grid-column:7/13;color:var(--mist);font-size:17px;margin-top:8px}
+.perks strong{color:var(--gold-hi);font-weight:400}
+@media (max-width:900px){.process .intro,.steps,.perks{grid-column:1/-1;position:static}.steps li{grid-template-columns:48px minmax(0,1fr)}}
+
+/* services */
+.services{background:var(--ink-2);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.services .wrap{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:28px;align-items:start}
+.services .list{grid-column:1/7;display:flex;flex-direction:column}
+.services .list .eyebrow{margin-bottom:26px}
+.svc{display:flex;justify-content:space-between;align-items:baseline;gap:20px;padding:20px 0;border-bottom:1px solid var(--rule);background:none;border-top:0;border-left:0;border-right:0;color:var(--ivory);text-align:left;cursor:default;font:inherit;width:100%}
+.svc b{font-family:var(--display);font-weight:400;font-size:clamp(24px,2.7vw,38px);line-height:1.1;transition:color .4s,transform .5s;transform-origin:left}
+.svc span{font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--mist);text-align:right}
+.svc.on b,.svc:hover b{color:var(--gold-hi);font-style:italic}
+.services .preview{grid-column:8/13;position:sticky;top:110px;aspect-ratio:4/5;overflow:hidden;background:var(--ink-3);max-width:100%}
+.services .preview img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .8s,transform 1.6s;transform:scale(1.06)}
+.services .preview img.on{opacity:1;transform:scale(1)}
+.services .preview p{position:absolute;left:18px;right:18px;bottom:16px;z-index:2;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold-hi)}
+@media (max-width:900px){.services .list{grid-column:1/-1}.services .preview{display:none}.svc{flex-direction:column;gap:4px}.svc span{text-align:left}}
+
+/* words */
+.words .wrap{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:28px}
+.words .eyebrow{grid-column:1/-1}
+.quotes{grid-column:1/11;display:grid;margin-top:30px}
+.quote{grid-area:1/1;opacity:0;visibility:hidden;transition:opacity .9s,visibility .9s}
+.quote.on{opacity:1;visibility:visible}
+.quote p{font-family:var(--display);font-size:clamp(26px,3.4vw,46px);line-height:1.22;letter-spacing:-.01em;text-wrap:pretty}
+.quote p::before{content:"\201C";color:var(--gold)}
+.quote p::after{content:"\201D";color:var(--gold)}
+.quote cite{display:block;margin-top:30px;font-style:normal;font-size:13px;font-weight:500;letter-spacing:.26em;text-transform:uppercase;color:var(--gold)}
+.qctl{grid-column:1/-1;display:flex;align-items:center;gap:26px;margin-top:44px}
+.qctl button{background:none;border:1px solid var(--rule);color:var(--ivory);width:48px;height:48px;border-radius:50%;cursor:pointer;font-size:18px;transition:border-color .3s}
+.qctl button:hover{border-color:var(--gold)}
+.qctl .count{font-family:var(--display);font-style:italic;color:var(--mist);font-variant-numeric:tabular-nums}
+.rating{grid-column:1/-1;margin-top:60px;color:var(--mist);font-size:16px;display:flex;gap:18px;flex-wrap:wrap}
+.rating b{color:var(--gold-hi);font-weight:400}
+@media (max-width:900px){.quotes{grid-column:1/-1}}
+
+/* contact */
+.contact .wrap{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:28px}
+.contact .info{grid-column:1/6;display:flex;flex-direction:column;gap:26px}
+.contact .info p{color:var(--mist);max-width:420px}
+.contact dl{margin:20px 0 0;display:grid;gap:18px}
+.contact dt{font-size:12px;font-weight:500;letter-spacing:.26em;text-transform:uppercase;color:var(--gold)}
+.contact dd{margin:4px 0 0;font-size:18px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.contact dd a{text-decoration:none}
+.copy-btn{background:none;border:1px solid var(--rule);color:var(--mist);font-family:var(--body);font-size:10px;letter-spacing:.2em;text-transform:uppercase;padding:5px 9px;cursor:pointer}
+.copy-btn:hover{border-color:var(--gold);color:var(--ivory)}
+form{grid-column:7/13;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:26px 22px}
+.field{display:flex;flex-direction:column;gap:8px;min-width:0}
+.field.full{grid-column:1/-1}
+label{font-size:12px;font-weight:500;letter-spacing:.24em;text-transform:uppercase;color:var(--mist)}
+input,select,textarea{background:transparent;border:0;border-bottom:1px solid var(--rule);color:var(--ivory);font-family:var(--body);font-weight:400;font-size:18px;padding:10px 0;border-radius:0;width:100%;transition:border-color .3s}
+select option{background:var(--ink-2);color:var(--ivory)}
+textarea{resize:vertical;min-height:100px}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--gold)}
+form .btn{justify-self:start}
+.status{grid-column:1/-1;font-size:14px;color:var(--gold-hi);min-height:1.5em}
+@media (max-width:900px){.contact .info,form{grid-column:1/-1}}
+@media (max-width:520px){form{grid-template-columns:1fr}}
+
+footer{border-top:1px solid var(--rule);padding-block:50px calc(40px + env(safe-area-inset-bottom,0px))}
+footer .wrap{display:flex;justify-content:space-between;align-items:end;gap:30px;flex-wrap:wrap;color:var(--mist);font-size:15px}
+footer .big{font-family:var(--display);font-size:clamp(70px,17vw,240px);line-height:.8;letter-spacing:.04em;color:var(--ivory);opacity:.9;width:100%;margin-bottom:40px}
+footer .big em{color:var(--gold)}
+footer nav{display:flex;gap:24px;flex-wrap:wrap}
+footer nav a{text-decoration:none}
+footer nav a:hover{color:var(--ivory)}
+
+@media (prefers-reduced-motion:reduce){
+  .marquee .track{animation:none}
+  .scroll-cue i{animation:none}
+  *{transition-duration:.01s!important}
+}
+</style>
+</head>
+<body>
+<header class="nav" id="nav">
+  <div class="wrap">
+    <a class="mark" href="#top" aria-label="HKNS Events, home"><b>HKNS</b><span>EVENTS</span></a>
+    <ul>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#process">Process</a></li>
+      <li><a href="#film">Film</a></li>
+      <li><a href="#words">Kind words</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a class="btn" href="#contact">Book a showroom tour</a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="drawer">Menu</button>
+  </div>
+</header>
+<div class="drawer" id="drawer" hidden>
+  <button class="menu-btn" id="menuClose" style="display:block">Close</button>
+  <a href="#work">Work</a>
+  <a href="#process">Process</a>
+  <a href="#film">Film</a>
+  <a href="#words">Kind words</a>
+  <a href="#contact">Contact</a>
+</div>
+
+<main id="top">
+  <section class="hero" id="hero" aria-label="Introduction">
+    <div class="stage">
+      <canvas id="hall" aria-hidden="true"></canvas>
+      <div class="hotspots" id="hotspots" aria-hidden="true"></div>
+      <div class="hero-top"><div class="wrap"><p class="eyebrow">Luxury event décor · Addison, Illinois</p><div class="scroll-cue" aria-hidden="true"><i></i>Scroll</div></div></div>
+      <div class="hero-copy">
+        <div class="wrap">
+          <div class="hero-text">
+            <h1><span style="white-space:nowrap">Designed to be</span><br><em>remembered.</em></h1>
+            <p class="lede">Bespoke stages, mandaps, floral walls and tablescapes for weddings and celebrations of every culture and faith.</p>
+            <div class="ctas">
+              <a class="btn solid" href="#contact">Book a showroom tour</a>
+              <a class="link" href="#work">See the work</a>
+            </div>
+          </div>
+          <ol class="chapters" id="chapters">
+            <li class="on"><span class="n">i.</span><span class="t">The hall</span><span class="d">Every celebration starts with an empty room.</span></li>
+            <li><span class="n">ii.</span><span class="t">The design</span><span class="d">We plan every line of it, then build a real-life mockup in our showroom.</span></li>
+            <li><span class="n">iii.</span><span class="t">The day</span><span class="d">Our coordinators set each piece so you walk into the room you approved.</span></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="marquee" aria-label="Traditions we design for">
+    <div class="track">
+      <span>South Asian</span><span>Muslim</span><span>Hindu</span><span>Christian</span><span>Jewish</span><span>Middle Eastern</span><span>Mexican</span><span>Fusion</span>
+      <span aria-hidden="true">South Asian</span><span aria-hidden="true">Muslim</span><span aria-hidden="true">Hindu</span><span aria-hidden="true">Christian</span><span aria-hidden="true">Jewish</span><span aria-hidden="true">Middle Eastern</span><span aria-hidden="true">Mexican</span><span aria-hidden="true">Fusion</span>
+    </div>
+  </div>
+
+  <section class="band about" id="about">
+    <div class="wrap">
+      <p class="eyebrow reveal">The studio</p>
+      <h2 class="reveal">A design studio for the rooms <em>people remember.</em></h2>
+      <div class="copy reveal">
+        <p>HKNS Events is a luxury décor studio in Addison, Illinois. For more than a decade we have designed weddings and celebrations from intimate gatherings to grand affairs, each one built around the couple's style and traditions.</p>
+        <p>Founder and creative lead <strong>Hasan Taqvi</strong> started designing events after his sister's wedding, where he saw how much a well-made room stays with the people in it.</p>
+      </div>
+      <div class="stats reveal">
+        <div><b>10+</b><span>Years designing events</span></div>
+        <div><b>5.0</b><span>Rating on The Knot and WeddingWire</span></div>
+        <div><b>2025</b><span>Best of Weddings award</span></div>
+        <div><b>3</b><span>States served: Illinois, Wisconsin, Michigan</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band work" id="work" style="padding-top:0">
+    <div class="wrap">
+      <div class="head">
+        <div>
+          <p class="eyebrow">Selected work</p>
+          <h2 style="margin-top:18px">Recent <em>rooms.</em></h2>
+        </div>
+        <a class="link" href="https://www.instagram.com/hknsevents/" target="_blank" rel="noopener">More on Instagram · @hknsevents</a>
+      </div>
+      <div class="grid" id="grid">
+        <button class="tile s7 reveal" data-i="0"><figure style="margin:0;height:100%"><img src="images/ivory-floral-arch-1600.webp" srcset="images/ivory-floral-arch-800.webp 800w, images/ivory-floral-arch-1600.webp 1600w" sizes="(max-width:760px) 100vw, 60vw" alt="Ivory rose wall with an arched opening, crystal chandeliers and a grey velvet sofa on a white stage" loading="lazy"><figcaption><b>Ivory Floral Arch</b><span>Reception stage</span></figcaption></figure></button>
+        <button class="tile s5 reveal" data-i="1"><figure style="margin:0;height:100%"><img src="images/gold-mandap-1600.webp" srcset="images/gold-mandap-800.webp 800w, images/gold-mandap-1600.webp 1600w" sizes="(max-width:760px) 100vw, 42vw" alt="Carved gold mandap wrapped in red roses with candle stands and a mirrored aisle" loading="lazy"><figcaption><b>The Gold Mandap</b><span>Ceremony</span></figcaption></figure></button>
+        <button class="tile s4 reveal" data-i="2"><figure style="margin:0;height:100%"><img src="images/gilded-lattice-stage-1600.webp" srcset="images/gilded-lattice-stage-800.webp 800w, images/gilded-lattice-stage-1600.webp 1600w" sizes="(max-width:760px) 100vw, 34vw" alt="Gold lattice backdrop framed in ivory and blush roses with a cream sofa and long head tables" loading="lazy"><figcaption><b>Gilded Lattice</b><span>Stage &amp; tables</span></figcaption></figure></button>
+        <button class="tile s8 reveal" data-i="3"><figure style="margin:0;height:100%"><img src="images/crimson-ceremony-1600.webp" srcset="images/crimson-ceremony-800.webp 800w, images/crimson-ceremony-1600.webp 1600w" sizes="(max-width:760px) 100vw, 66vw" alt="Long white aisle lined with candles and red rose arrangements leading to a draped mandap" loading="lazy"><figcaption><b>Crimson Ceremony</b><span>Aisle &amp; mandap</span></figcaption></figure></button>
+        <button class="tile s5 reveal" data-i="4"><figure style="margin:0;height:100%"><img src="images/mehndi-in-bloom-1600.webp" srcset="images/mehndi-in-bloom-800.webp 800w, images/mehndi-in-bloom-1600.webp 1600w" sizes="(max-width:760px) 100vw, 42vw" alt="Colorful mehndi stage with painted arches, marigold florals, parasols and floor cushions" loading="lazy"><figcaption><b>Mehndi in Bloom</b><span>Mehndi</span></figcaption></figure></button>
+        <button class="tile s7 reveal" data-i="5"><figure style="margin:0;height:100%"><img src="images/blush-floral-wall-1600.webp" srcset="images/blush-floral-wall-800.webp 800w, images/blush-floral-wall-1600.webp 1600w" sizes="(max-width:760px) 100vw, 60vw" alt="Ivory floral wall on blush draping with crystal chandeliers, gold spiral pillars and a white aisle" loading="lazy"><figcaption><b>Blush &amp; Ivory</b><span>Reception</span></figcaption></figure></button>
+      </div>
+    </div>
+  </section>
+
+  <section class="film" id="film" aria-label="The HKNS film">
+    <div class="poster"><img src="images/crystal-ballroom-1600.webp" srcset="images/crystal-ballroom-800.webp 800w, images/crystal-ballroom-1600.webp 1600w" sizes="100vw" alt="Ballroom with crystal centerpieces, gold chairs, a white aisle and a floral stage" loading="lazy"></div>
+    <div class="yt" id="yt"></div>
+    <div class="wrap">
+      <div>
+        <p class="eyebrow">The film</p>
+        <h2 style="margin-top:18px">A grand reception, <em>start to finish.</em></h2>
+      </div>
+      <a class="play" href="https://www.youtube.com/watch?v=oF0B0heofI0" target="_blank" rel="noopener"><i></i>Watch with sound</a>
+    </div>
+  </section>
+
+  <section class="band process" id="process">
+    <div class="wrap">
+      <div class="intro">
+        <p class="eyebrow">How we work</p>
+        <h2>Touch. See. Feel. <em>Believe.</em></h2>
+        <p>You see the exact pieces before your event, in person, in our private showroom. Nothing on the day is a surprise unless you want it to be.</p>
+      </div>
+      <ol class="steps">
+        <li class="reveal"><span class="n">01</span><div><h3>Inquire</h3><p>Tell us your date, venue, guest count and the feeling you want the room to have.</p></div></li>
+        <li class="reveal"><span class="n">02</span><div><h3>Visit the showroom</h3><p>A private tour and design consultation. Handle the fabrics, florals, centerpieces, furniture and mandaps that could be at your event.</p></div></li>
+        <li class="reveal"><span class="n">03</span><div><h3>Approve a real-life mockup</h3><p>See your design built before the day and adjust anything. Or keep a few elements hidden as a surprise.</p></div></li>
+        <li class="reveal"><span class="n">04</span><div><h3>Day-of coordination</h3><p>A team of two to four coordinators handles setup, lighting, timelines and vendors.</p></div></li>
+      </ol>
+      <p class="perks reveal">Clients also get <strong>vendor savings</strong> from over ten years of relationships, and a <strong>lifetime referral code</strong> to share with family and friends.</p>
+    </div>
+  </section>
+
+  <section class="band services" id="services">
+    <div class="wrap">
+      <div class="list" id="svcList">
+        <p class="eyebrow">What we design</p>
+        <button class="svc on" data-img="2"><b>Stages &amp; backdrops</b><span>Sofas, frames, lattice</span></button>
+        <button class="svc" data-img="1"><b>Mandaps &amp; chuppahs</b><span>Ceremony structures</span></button>
+        <button class="svc" data-img="5"><b>Floral walls</b><span>Installations &amp; arches</span></button>
+        <button class="svc" data-img="3"><b>Aisles</b><span>Runners, candles, florals</span></button>
+        <button class="svc" data-img="6"><b>Tablescapes</b><span>Centerpieces &amp; linens</span></button>
+        <button class="svc" data-img="0"><b>Draping &amp; lighting</b><span>Chandeliers &amp; uplighting</span></button>
+        <button class="svc" data-img="4"><b>Mehndi &amp; sangeet</b><span>Color, cushions, parasols</span></button>
+      </div>
+      <div class="preview" id="svcPreview" aria-hidden="true">
+        <img class="on" src="images/gilded-lattice-stage-800.webp" alt="" loading="lazy">
+        <p id="svcCap">Stages &amp; backdrops</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band words" id="words">
+    <div class="wrap">
+      <p class="eyebrow">Kind words</p>
+      <div class="quotes" id="quotes" aria-live="polite">
+        <blockquote class="quote on" style="margin:0"><p>My taste is very minimal and low key. Hasan took elements of my taste and made it so grand and beautiful without steering away from it.</p><cite>Rija Firoz</cite></blockquote>
+        <blockquote class="quote" style="margin:0"><p>We entrusted him with complete creative freedom, and he absolutely nailed it by bringing our vision to life flawlessly.</p><cite>Misbah Mowla</cite></blockquote>
+        <blockquote class="quote" style="margin:0"><p>I have had them do multiple events for me and each time it's been perfection and jaw dropping.</p><cite>Ashi Khan</cite></blockquote>
+        <blockquote class="quote" style="margin:0"><p>My daughter was able to see all the decorations prior to the events and make any minor changes. He brought her vision to life.</p><cite>Yaguta Merchant</cite></blockquote>
+        <blockquote class="quote" style="margin:0"><p>Everyone was raving about the beauty of the décor! And they guessed it was Beauty and the Beast, so the vision came through.</p><cite>Lena</cite></blockquote>
+        <blockquote class="quote" style="margin:0"><p>Every element, from the floral arrangements to the table settings, was executed with such care and precision.</p><cite>Naqib Rahim</cite></blockquote>
+      </div>
+      <div class="qctl">
+        <button id="qPrev" aria-label="Previous review">&#8592;</button>
+        <button id="qNext" aria-label="Next review">&#8594;</button>
+        <span class="count" id="qCount">1 / 6</span>
+      </div>
+      <p class="rating"><span><b>5.0</b> on The Knot</span><span><b>5.0</b> on WeddingWire</span><span>Best of Weddings 2025</span></p>
+    </div>
+  </section>
+
+  <section class="band contact" id="contact" style="padding-top:0">
+    <div class="wrap">
+      <div class="info">
+        <p class="eyebrow">Get in touch</p>
+        <h2>Book a private <em>showroom tour.</em></h2>
+        <p>Tell us about your celebration and we will reach out to schedule a design consultation.</p>
+        <dl>
+          <div><dt>Email</dt><dd><a href="mailto:hknsevents@gmail.com">hknsevents@gmail.com</a><button class="copy-btn" data-copy="hknsevents@gmail.com">Copy</button></dd></div>
+          <div><dt>Phone</dt><dd><a href="tel:+16302291402">(630) 229-1402</a></dd></div>
+          <div><dt>Showroom</dt><dd>1010 W Fullerton Ave, Unit E<br>Addison, IL 60101</dd></div>
+          <div><dt>Instagram</dt><dd><a href="https://www.instagram.com/hknsevents/" target="_blank" rel="noopener">@hknsevents</a></dd></div>
+        </dl>
+      </div>
+      <form id="inquiry" novalidate>
+        <div class="field"><label for="f-name">Name</label><input id="f-name" name="name" autocomplete="name" required></div>
+        <div class="field"><label for="f-email">Email</label><input id="f-email" name="email" type="email" autocomplete="email" required></div>
+        <div class="field"><label for="f-phone">Phone</label><input id="f-phone" name="phone" type="tel" autocomplete="tel"></div>
+        <div class="field"><label for="f-date">Event date</label><input id="f-date" name="date" type="date"></div>
+        <div class="field"><label for="f-type">Event</label>
+          <select id="f-type" name="event">
+            <option>Wedding</option><option>Nikah</option><option>Mehndi or sangeet</option><option>Reception or walima</option><option>Engagement</option><option>Milestone celebration</option><option>Corporate event</option><option>Other</option>
+          </select></div>
+        <div class="field"><label for="f-guests">Guests</label><input id="f-guests" name="guests" inputmode="numeric" placeholder="Approx."></div>
+        <div class="field full"><label for="f-venue">Venue</label><input id="f-venue" name="venue" placeholder="If booked"></div>
+        <div class="field full"><label for="f-msg">Your vision</label><textarea id="f-msg" name="message" placeholder="Colors, traditions, inspiration"></textarea></div>
+        <button class="btn solid" type="submit">Send inquiry</button>
+        <p class="status" id="status" role="status"></p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="big" aria-hidden="true">HKNS<em>.</em></div>
+    <span>© 2026 HKNS Events · Addison, Illinois</span>
+    <nav><a href="#work">Work</a><a href="#process">Process</a><a href="#contact">Contact</a><a href="https://www.instagram.com/hknsevents/" target="_blank" rel="noopener">Instagram</a></nav>
+  </div>
+</footer>
+
+<div class="lightbox" id="lightbox" hidden role="dialog" aria-modal="true" aria-label="Photo viewer">
+  <img id="lbImg" alt="">
+  <div class="bar"><b id="lbCap"></b><div class="ctl"><button id="lbPrev">Prev</button><button id="lbNext">Next</button><button id="lbClose">Close</button></div></div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script>
+/* Paste a Formspree endpoint here (https://formspree.io/f/xxxx) to receive inquiries by email. Empty = opens the visitor's email app. */
+const FORM_ENDPOINT = "";
+const YT_ID = "oF0B0heofI0";
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const mobile = matchMedia("(max-width: 900px)").matches;
+
+/* ---------- 3D hall ---------- */
+(function hall(){
+  const canvas = document.getElementById("hall");
+  if (!window.THREE) return;
+  let renderer;
+  try { renderer = new THREE.WebGLRenderer({canvas, antialias:true, alpha:true, powerPreference:"high-performance"}); }
+  catch(e){ return; }
+  const PR = Math.min(window.devicePixelRatio || 1, mobile ? 1.5 : 1.75);
+  renderer.setPixelRatio(PR);
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(mobile ? 66 : 50, 1, .1, 200);
+  const TAU = Math.PI*2;
+  const rnd = (a,b)=>a+Math.random()*(b-a);
+
+  /* lines: every segment carries the moment it gets drawn */
+  const LP = [], LD = [];
+  const lerp = (a,b,t)=>[a[0]+(b[0]-a[0])*t, a[1]+(b[1]-a[1])*t, a[2]+(b[2]-a[2])*t];
+  function path(pts, d0, d1, step){
+    step = step || .3;
+    const lens = []; let total = 0;
+    for (let i=1;i<pts.length;i++){ const a=pts[i-1], b=pts[i]; const l=Math.hypot(b[0]-a[0],b[1]-a[1],b[2]-a[2]); lens.push(l); total+=l; }
+    if (!total) return;
+    let acc = 0;
+    for (let i=1;i<pts.length;i++){
+      const l = lens[i-1], n = Math.max(1, Math.ceil(l/step));
+      for (let k=0;k<n;k++){
+        const a = lerp(pts[i-1],pts[i],k/n), b = lerp(pts[i-1],pts[i],(k+1)/n);
+        LP.push(...a, ...b); LD.push(d0+(d1-d0)*((acc+l*(k+1)/n)/total)); LD.push(LD[LD.length-1]);
+      }
+      acc += l;
+    }
+  }
+  const curve = (fn,n,d0,d1,step)=>{ const p=[]; for (let i=0;i<=n;i++) p.push(fn(i/n)); path(p,d0,d1,step||.15); };
+  const rect = (x0,x1,y0,y1,z,d0,d1)=>path([[x0,y0,z],[x1,y0,z],[x1,y1,z],[x0,y1,z],[x0,y0,z]],d0,d1);
+  function box(x0,x1,y0,y1,z0,z1,d0,d1){
+    const m=(d0+d1)/2;
+    path([[x0,y0,z1],[x1,y0,z1],[x1,y0,z0],[x0,y0,z0],[x0,y0,z1]],d0,m);
+    path([[x0,y1,z1],[x1,y1,z1],[x1,y1,z0],[x0,y1,z0],[x0,y1,z1]],m,d1);
+    [[x0,z1],[x1,z1],[x1,z0],[x0,z0]].forEach(c=>path([[c[0],y0,c[1]],[c[0],y1,c[1]]],d0,m));
+  }
+  const ring = (cx,cy,cz,r,d0,d1,n)=>curve(t=>[cx+Math.cos(t*TAU)*r, cy, cz+Math.sin(t*TAU)*r], n||36, d0, d1, .2);
+  const helix = (cx,cz,y0,y1,r,turns,d0,d1,ph)=>curve(t=>{ const a=t*turns*TAU+(ph||0); return [cx+Math.cos(a)*r, y0+(y1-y0)*t, cz+Math.sin(a)*r]; }, Math.round(turns*36), d0, d1);
+
+  /* points: florals, crystals, candle flames */
+  const PP=[], PD=[], PS=[], PC=[], PSeed=[];
+  const C = { ivory:[1,.95,.86], blush:[1,.74,.68], red:[1,.2,.18], wine:[.75,.1,.14], crystal:[.86,.93,1], warm:[1,.88,.66], flame:[1,.78,.42], blue:[.68,.78,1], dust:[.6,.5,.36] };
+  const pick = pal=>{ let r=Math.random(), s=0; for (const [c,w] of pal){ s+=w; if (r<=s) return C[c]; } return C[pal[0][0]]; };
+  const pt = (p,d,s,c)=>{ PP.push(...p); PD.push(d); PS.push(s); PC.push(...c); PSeed.push(Math.random()); };
+  function cluster(cx,cy,cz,rx,ry,rz,n,d0,d1,pal,s0,s1){
+    for (let k=0;k<n;k++){ const u=rnd(0,TAU), v=Math.acos(rnd(-1,1)), r=Math.cbrt(Math.random());
+      pt([cx+Math.sin(v)*Math.cos(u)*rx*r, cy+Math.cos(v)*ry*r, cz+Math.sin(v)*Math.sin(u)*rz*r], rnd(d0,d1), rnd(s0||2,s1||3.4), pick(pal)); }
+  }
+  const FLORAL = [["ivory",.62],["blush",.38]];
+  const FLORAL_B = [["ivory",.5],["blush",.35],["blue",.15]];
+
+  const W=15, ZF=12, ZB=-24, H=9;
+  const hotspots = [];
+
+  /* ---- the room ---- */
+  for (let x=-W; x<=W+.01; x+=2.5){ const d=Math.abs(x)/W*.1; path([[x,0,ZF],[x,0,ZB]], d, d+.14, .4); }
+  for (let z=ZF; z>=ZB; z-=2.5){ const d=.03+(ZF-z)/(ZF-ZB)*.1; path([[0,0,z],[W,0,z]], d, d+.08, .4); path([[0,0,z],[-W,0,z]], d, d+.08, .4); }
+  rect(-W,W,0,H,ZB,.1,.25);
+  for (const sx of [-W,W]){
+    path([[sx,0,ZF],[sx,0,ZB],[sx,H,ZB],[sx,H,ZF]],.1,.25);
+    path([[sx,1,ZF],[sx,1,ZB]],.16,.26,.4);
+    for (let z=ZF-1.5; z>ZB+2; z-=4.6){ const d=.17+(ZF-z)/36*.1; path([[sx,1.5,z],[sx,1.5,z-3.6],[sx,6.4,z-3.6],[sx,6.4,z],[sx,1.5,z]],d,d+.06); }
+  }
+  /* ceiling coffers with crystal canopy */
+  const coffers=[-13.5,-4,5.5];
+  coffers.forEach((zc,i)=>{ const d=.2+i*.02;
+    path([[-5.8,H,zc-3.4],[5.8,H,zc-3.4],[5.8,H,zc+3.4],[-5.8,H,zc+3.4],[-5.8,H,zc-3.4]],d,d+.08);
+    path([[-5.3,H-.35,zc-2.9],[5.3,H-.35,zc-2.9],[5.3,H-.35,zc+2.9],[-5.3,H-.35,zc+2.9],[-5.3,H-.35,zc-2.9]],d+.04,d+.1);
+    for (let k=0;k<=16;k++){ const x=-5+k*10/16;
+      for (let s=0;s<=24;s++){ const t=s/24; pt([x, H-.4-Math.sin(t*Math.PI)*(.7+.25*Math.sin(k*.9)), zc-2.8+t*5.6], .58+i*.04+t*.04, rnd(.9,1.6), C.crystal); }
+      if (k%2===0) for (let s=0;s<5;s++) pt([x, H-1.2-s*.22, zc+rnd(-.4,.4)], .64+i*.04, 1.2, C.crystal);
+    }
+  });
+  /* back draping */
+  for (let x=-14; x<=14; x+=.7){ if (Math.abs(x)<4.9) continue;
+    const p=[]; for (let y=0;y<=H;y+=.3) p.push([x+Math.sin(y*1.2+x)*.07, y, ZB+.4+Math.sin(x*3.1)*.12]);
+    const d=.22+Math.abs(x)/14*.1; path(p,d,d+.08,.3); }
+
+  /* ---- stage ---- */
+  box(-7.2,7.2,0,1.1,-22,-17.2,.24,.36);
+  box(-1.9,1.9,0,.55,-17.2,-16.1,.3,.36);
+  const archY = x=>{ const h=1.55, ax=Math.abs(x); if (ax>=h) return 1.1; return 3.7 + Math.sqrt(h*h-ax*ax)*1.3; };
+  rect(-4.6,4.6,1.1,8.1,-21.4,.33,.45);
+  curve(t=>{ const x=-1.55+t*3.1; return [x, archY(x), -21.35]; },60,.4,.47,.1);
+  path([[-1.55,1.1,-21.35],[-1.55,3.7,-21.35]],.38,.41); path([[1.55,1.1,-21.35],[1.55,3.7,-21.35]],.38,.41);
+  /* sofa and accent chairs */
+  curve(t=>[-2.5+t*5, 1.75+Math.sin(t*Math.PI)*.4+Math.pow(Math.abs(t-.5)*2,6)*.5, -19.9+Math.sin(t*Math.PI)*.3],50,.46,.52,.1);
+  path([[-2.4,1.55,-19.6],[2.4,1.55,-19.6]],.47,.52);
+  for (const sx of [-2.4,2.4]) path([[sx,1.1,-19.4],[sx,1.55,-19.6],[sx,2.1,-19.9]],.5,.53,.12);
+  for (const sx of [-3.6,3.6]){ curve(t=>[sx-.45+t*.9, 1.6+Math.sin(t*Math.PI)*.35, -19.5+Math.sin(t*Math.PI)*.15],20,.5,.54,.1); path([[sx-.45,1.45,-19.2],[sx+.45,1.45,-19.2]],.5,.54); }
+  /* chandeliers in front of the floral wall */
+  for (const [x,y,big] of [[-2.7,5.5,0],[2.7,5.5,0],[0,7.2,1]]){
+    path([[x,8.1,-21],[x,y+.4,-21]],.5,.54);
+    for (let k=0;k<5;k++){ const r=(big?.7:.5)*(1-k/6)+.08; const n=Math.round(r*30); for (let j=0;j<n;j++){ const a=j/n*TAU; pt([x+Math.cos(a)*r, y-k*.2, -20.95+Math.sin(a)*r*.6], .62+k*.01, 1.6, C.warm); } }
+  }
+  /* cascading floral columns */
+  [[-6.3,4.4,0],[-5.2,5.8,1],[5.2,5.8,2],[6.3,4.4,3]].forEach(([x0,h,i])=>{
+    const cx=t=>x0+Math.sin(t*Math.PI*1.6+i)*.38;
+    curve(t=>[cx(t), 1.1+t*h, -20.7],40,.44+i*.01,.5+i*.01,.15);
+    for (let s=0;s<=60;s++){ const t=s/60; cluster(cx(t), 1.1+t*h, -20.6, .34,.12,.25, 7, .7+t*.12, .74+t*.12, FLORAL_B, 1.8, 3.2); }
+    for (let o=0;o<6;o++){ const t0=rnd(.2,.9); for (let s=0;s<8;s++) pt([cx(t0)+rnd(.25,.4)*(o%2?1:-1), 1.1+t0*h-s*.13, -20.4], .82+s*.01, 1.4, C.ivory); }
+  });
+  hotspots.push({p:[5.6,5.4,-20.6], t:"Cascading floral columns"});
+  /* gold lattice candle panels */
+  for (const sx of [-1,1]){ const x0=sx*8.2, x1=sx*10.6, z=-21.2, top=4.8;
+    rect(Math.min(x0,x1),Math.max(x0,x1),0,top,z,.36,.46);
+    for (let c=1;c<4;c++){ const x=x0+(x1-x0)*c/4; path([[x,0,z],[x,top,z]],.4,.46); }
+    for (let r=1;r<8;r++){ const y=top*r/8; path([[x0,y,z],[x1,y,z]],.42,.47); }
+    for (let c=0;c<4;c++) for (let r=0;r<8;r++) if (Math.random()<.72) pt([x0+(x1-x0)*(c+.5)/4, top*r/8+.18, z+.05], .72+r*.01, 2.6, C.flame);
+  }
+  hotspots.push({p:[-9.4,5.6,-21.2], t:"Gold lattice candle panels"});
+
+  /* ---- aisle ---- */
+  box(-1.15,1.15,0,.03,-16.1,9.5,.28,.42);
+  for (let z=-15; z<9; z+=2.5){ const d=.36+(z+15)/24*.1; const h=[1.4,2.2,.9][Math.round((z+15)/2.5)%3];
+    for (const sx of [-1.5,1.5]){ path([[sx,0,z],[sx,h,z]],d,d+.04); ring(sx,h,z,.09,d+.03,d+.05,10); pt([sx,h+.14,z],.7+(z+15)/24*.1,3.6,C.flame); pt([sx*1.12,.12,z+1.2],.72+(z+15)/24*.1,2.4,C.flame); } }
+  for (const sx of [-1.9,1.9]) cluster(sx,.3,10.2,.75,.45,.55,190,.74,.84,[["red",.65],["wine",.25],["blush",.1]],2.2,3.6);
+  hotspots.push({p:[2.1,1.6,10.2], t:"Candlelit aisle"});
+  for (const sx of [-3.1,3.1]){ ring(sx,0,10.8,.45,.44,.47,24); ring(sx,1.7,10.8,.45,.5,.53,24); helix(sx,10.8,0,1.7,.4,2.2,.44,.54,0); helix(sx,10.8,0,1.7,.4,2.2,.44,.54,Math.PI); cluster(sx,1.95,10.8,.38,.16,.38,40,.8,.86,[["red",.6],["flame",.4]],2,3); }
+
+  /* ---- guest tables, each dressed in a different HKNS centerpiece ---- */
+  const Y0=.8;
+  function table(x,z,d){
+    ring(x,Y0,z,1.15,d,d+.05,40); ring(x,.04,z,1.25,d+.02,d+.06,40);
+    for (let k=0;k<12;k++){ const a=k/12*TAU; path([[x+Math.cos(a)*1.15,Y0,z+Math.sin(a)*1.15],[x+Math.cos(a)*1.25,.04,z+Math.sin(a)*1.25]],d+.01,d+.05,.25); }
+    if (Math.abs(x) < 7) for (let k=0;k<6;k++){ const a=k/6*TAU+.5, cx=x+Math.cos(a)*1.8, cz=z+Math.sin(a)*1.8, hx=-Math.sin(a), hz=Math.cos(a);
+      curve(t=>{ const b=t*TAU; return [cx+hx*Math.cos(b)*.24, 1.12+Math.sin(b)*.3, cz+hz*Math.cos(b)*.24]; },16,d+.03,d+.07,.15);
+      path([[cx,.82,cz],[cx,0,cz]],d+.03,d+.06,.3); }
+  }
+  const CP = {
+    crystal(x,z,d,D){ path([[x,Y0,z],[x,Y0+2,z]],d,d+.04);
+      [[.5,.55],[1.1,.45],[1.7,.35]].forEach(([h,r],i)=>{ ring(x,Y0+h,z,r,d+.02+i*.01,d+.05+i*.01,24);
+        for (let j=0;j<18;j++){ const a=j/18*TAU; for (let s=0;s<3;s++) pt([x+Math.cos(a)*r, Y0+h-.1-s*.1, z+Math.sin(a)*r], D+i*.02, 1.3, C.crystal); } });
+      cluster(x,Y0+2.15,z,.36,.3,.36,70,D+.06,D+.1,FLORAL); },
+    tower(x,z,d,D){ for (let k=0;k<4;k++){ const a=k/4*TAU+.4; path([[x+Math.cos(a)*.12,Y0,z+Math.sin(a)*.12],[x+Math.cos(a)*.34,Y0+1.6,z+Math.sin(a)*.34]],d,d+.05); }
+      ring(x,Y0+1.6,z,.34,d+.04,d+.06,20);
+      cluster(x,Y0+2.15,z,.62,.5,.62,170,D,D+.08,FLORAL_B,2,3.4);
+      for (let k=0;k<5;k++){ const a=k/5*TAU; for (let s=0;s<9;s++) pt([x+Math.cos(a)*(.55+s*.04), Y0+2-s*.12, z+Math.sin(a)*(.55+s*.04)], D+.08+s*.01, 1.6, C.ivory); } },
+    floating(x,z,d,D){ [[0,0,1],[.36,.16,.72],[-.3,.22,.55],[.14,-.36,.86],[-.27,-.26,.46]].forEach(([ox,oz,h],i)=>{
+        ring(x+ox,Y0,z+oz,.1,d+i*.01,d+.03+i*.01,10); ring(x+ox,Y0+h,z+oz,.1,d+.02+i*.01,d+.04+i*.01,10);
+        path([[x+ox-.1,Y0,z+oz],[x+ox-.1,Y0+h,z+oz]],d,d+.03); path([[x+ox+.1,Y0,z+oz],[x+ox+.1,Y0+h,z+oz]],d,d+.03);
+        pt([x+ox,Y0+h-.08,z+oz],D+i*.01,4,C.flame); });
+      for (let k=0;k<40;k++){ const a=rnd(0,TAU), r=rnd(.45,.9); pt([x+Math.cos(a)*r,Y0+.03,z+Math.sin(a)*r],D+.05,rnd(1.6,2.4),Math.random()<.6?C.red:C.blush); } },
+    candelabra(x,z,d,D){ ring(x,Y0,z,.22,d,d+.02,14); path([[x,Y0,z],[x,Y0+2.2,z]],d,d+.04); pt([x,Y0+2.32,z],D,4,C.flame);
+      for (let k=0;k<4;k++){ const a=k/4*TAU+.78, ex=Math.cos(a)*.5, ez=Math.sin(a)*.5;
+        curve(t=>[x+ex*t, Y0+1.35+Math.pow(t,1.6)*.55, z+ez*t],12,d+.03,d+.06,.1);
+        ring(x+ex,Y0+1.9,z+ez,.06,d+.05,d+.07,8); pt([x+ex,Y0+2.02,z+ez],D+.02,3.6,C.flame);
+        for (let s=0;s<4;s++) pt([x+ex*.6,Y0+1.4-s*.1,z+ez*.6],D+.04,1.2,C.crystal); }
+      cluster(x,Y0+.2,z,.5,.16,.5,60,D+.04,D+.08,FLORAL,1.6,2.6); },
+    roses(x,z,d,D){ ring(x,Y0+.02,z,.62,d,d+.03,24);
+      cluster(x,Y0+.18,z,.58,.3,.58,190,D,D+.08,[["red",.6],["wine",.3],["blush",.1]],2.2,3.6);
+      for (let k=0;k<8;k++){ const a=k/8*TAU; ring(x+Math.cos(a)*.85,Y0,z+Math.sin(a)*.85,.06,d+.03,d+.05,8); pt([x+Math.cos(a)*.85,Y0+.12,z+Math.sin(a)*.85],D+.04,3.2,C.flame); } },
+    tree(x,z,d,D){ const tx=t=>x-.2+Math.sin(t*Math.PI*.9)*.9, ty=t=>Y0+t*2.3+Math.sin(t*Math.PI)*.2;
+      curve(t=>[x, Y0+t*1.4, z],10,d,d+.03);
+      curve(t=>[x+Math.sin(t*Math.PI)*.0+(-.9+t*1.8), Y0+1.4+Math.sin(t*Math.PI)*.9, z],30,d+.03,d+.07,.1);
+      for (let s=0;s<=30;s++){ const t=s/30; cluster(x-.9+t*1.8, Y0+1.4+Math.sin(t*Math.PI)*.9, z, .26,.22,.26, 9, D+t*.06, D+.02+t*.06, FLORAL, 1.8, 3); }
+      for (const e of [-.9,.9]) for (let s=0;s<9;s++) pt([x+e+rnd(-.05,.05), Y0+1.3-s*.12, z], D+.08+s*.01, 1.6, C.ivory); }
+  };
+  const LAB = { crystal:"Crystal tier centerpiece", tower:"Floral tower", floating:"Floating candles", candelabra:"Gold candelabra", roses:"Red rose mound", tree:"Floral arch centerpiece" };
+  const layout = [[-12,["crystal","tower"]],[-5,["floating","candelabra"]],[2,["roses","tree"]]];
+  const tableSpots = [];
+  layout.forEach(([z,[left,right]],row)=>{
+    [[-5.2,left],[-9.8,left],[5.2,right],[9.8,right]].forEach(([x,type],k)=>{
+      const d=.36+(12-(z+12))/26*.0+row*.04+(Math.abs(x)>7?.04:0);
+      table(x,z,d); CP[type](x,z,d+.06,.7+row*.04);
+      if (Math.abs(x)<7) hotspots.push({p:[x,Y0+3.1,z], t:LAB[type]});
+    });
+  });
+  hotspots.push({p:[-3.4,6.6,-21.2], t:"Floral wall stage"});
+
+  /* floral wall roses blooming out from the arch */
+  for (let x=-4.45; x<=4.45; x+=.36) for (let y=1.25; y<=7.95; y+=.36){
+    const jx=x+rnd(-.1,.1), jy=y+rnd(-.1,.1);
+    if (Math.abs(jx)<1.7 && jy<archY(jx)+.15) continue;
+    const d=.56+Math.hypot(jx, jy-4)/7*.26, c=Math.random()<.18?C.blush:C.ivory, r=rnd(.08,.13);
+    pt([jx,jy,-21.2],d,4.4,c); for (let k=0;k<8;k++){ const a=k/8*TAU+rnd(0,.5); pt([jx+Math.cos(a)*r, jy+Math.sin(a)*r, -21.2+rnd(-.03,.03)], d+rnd(0,.02), rnd(2.6,3.6), c); }
+  }
+  for (const sx of [-4.6,4.6]) cluster(sx,1.6,-19.4,.75,.5,.5,120,.72,.8,FLORAL,2,3.2);
+  for (let k=0;k<(mobile?200:380);k++) pt([rnd(-W,W), rnd(.2,H), rnd(ZB,ZF)], rnd(0,.3), rnd(.6,1.2), C.dust);
+
+  /* ---- materials ---- */
+  const U = { uProgress:{value: reduce?1:0}, uTime:{value:0}, uScan:{value:-10}, uPR:{value:PR} };
+  const lineGeo = new THREE.BufferGeometry();
+  lineGeo.setAttribute("position", new THREE.Float32BufferAttribute(LP,3));
+  lineGeo.setAttribute("aDelay", new THREE.Float32BufferAttribute(LD,1));
+  const lineMat = new THREE.ShaderMaterial({
+    uniforms: Object.assign({ uColor:{value:new THREE.Color(.96,.78,.5)} }, U),
+    vertexShader:`attribute float aDelay;uniform float uProgress;uniform float uScan;varying float vA;varying float vF;
+      void main(){vec4 mv=modelViewMatrix*vec4(position,1.);float on=smoothstep(aDelay,aDelay+.012,uProgress);
+      float fl=1.-smoothstep(0.,.05,uProgress-aDelay);float fog=clamp(1.-(-mv.z-10.)/50.,.3,1.);
+      float sc=exp(-pow((position.y-uScan)*3.,2.))*.7;vF=fl*on;vA=on*fog*(.9+fl*1.3+sc);gl_Position=projectionMatrix*mv;}`,
+    fragmentShader:`uniform vec3 uColor;varying float vA;varying float vF;void main(){vec3 c=mix(uColor,vec3(1.,.97,.9),clamp(vF,0.,1.));gl_FragColor=vec4(c,vA);}`,
+    transparent:true, depthWrite:false, blending:THREE.AdditiveBlending
+  });
+  scene.add(new THREE.LineSegments(lineGeo, lineMat));
+
+  const ptGeo = new THREE.BufferGeometry();
+  ptGeo.setAttribute("position", new THREE.Float32BufferAttribute(PP,3));
+  ptGeo.setAttribute("aDelay", new THREE.Float32BufferAttribute(PD,1));
+  ptGeo.setAttribute("aSize", new THREE.Float32BufferAttribute(PS,1));
+  ptGeo.setAttribute("aColor", new THREE.Float32BufferAttribute(PC,3));
+  ptGeo.setAttribute("aSeed", new THREE.Float32BufferAttribute(PSeed,1));
+  const ptMat = new THREE.ShaderMaterial({
+    uniforms: U,
+    vertexShader:`attribute float aDelay;attribute float aSize;attribute vec3 aColor;attribute float aSeed;
+      uniform float uProgress;uniform float uTime;uniform float uPR;varying float vA;varying vec3 vC;
+      void main(){vec3 p=position;p.y+=sin(uTime*.4+aSeed*20.)*.03;vec4 mv=modelViewMatrix*vec4(p,1.);
+      float on=smoothstep(aDelay,aDelay+.05,uProgress);float fl=1.-smoothstep(0.,.08,uProgress-aDelay);
+      float tw=.75+.25*sin(uTime*(1.+aSeed)+aSeed*6.28);float fog=clamp(1.-(-mv.z-10.)/50.,.35,1.);
+      vA=on*tw*fog*(1.3+fl*on*1.4);vC=aColor;gl_PointSize=aSize*uPR*(1.+fl*on*.7)*(24./-mv.z);gl_Position=projectionMatrix*mv;}`,
+    fragmentShader:`varying float vA;varying vec3 vC;void main(){float d=length(gl_PointCoord-.5);float a=smoothstep(.5,.0,d);gl_FragColor=vec4(vC,a*a*vA);}`,
+    transparent:true, depthWrite:false, blending:THREE.AdditiveBlending
+  });
+  scene.add(new THREE.Points(ptGeo, ptMat));
+
+  /* ---- labels that appear as the camera passes each piece ---- */
+  const labelLayer = document.getElementById("hotspots");
+  const labels = hotspots.map(h=>{ const el=document.createElement("div"); el.className="hs"; el.innerHTML=`<i></i><span>${h.t}</span>`; labelLayer.appendChild(el); return { el, v:new THREE.Vector3(...h.p) }; });
+
+  /* ---- camera path down the aisle ---- */
+  const look = new THREE.Vector3(0, 3.6, -21);
+  const st = { p:0, mx:0, my:0, tx:0, ty:0 };
+  const startZ = mobile ? 19 : 17;
+  function resize(){ const w=canvas.clientWidth, h=canvas.clientHeight; renderer.setSize(w,h,false); camera.aspect=w/h; camera.updateProjectionMatrix(); }
+  resize(); addEventListener("resize", resize);
+  if (!reduce && !mobile) addEventListener("pointermove", e=>{ st.tx=(e.clientX/innerWidth-.5); st.ty=(e.clientY/innerHeight-.5); });
+
+  const hero = document.getElementById("hero");
+  const chapters = [...document.querySelectorAll("#chapters li")];
+  const heroText = document.querySelector(".hero-text");
+  let visible = true;
+  new IntersectionObserver(es=>{ visible = es[0].isIntersecting; }).observe(hero);
+  const heroProgress = ()=>{ const r=hero.getBoundingClientRect(), span=hero.offsetHeight-innerHeight; return Math.min(1, Math.max(0, -r.top/Math.max(1,span))); };
+  const tmp = new THREE.Vector3();
+  let last = performance.now(), active = 0;
+  function frame(now){
+    requestAnimationFrame(frame);
+    if (!visible) return;
+    const dt = Math.min(.05,(now-last)/1000); last = now;
+    U.uTime.value += dt;
+    const p = heroProgress(); st.p += (p - st.p) * (reduce ? 1 : .08);
+    const e = st.p*st.p*(3-2*st.p);
+    st.mx += (st.tx-st.mx)*.04; st.my += (st.ty-st.my)*.04;
+    camera.position.set(st.mx*1.4 + Math.sin(U.uTime.value*.12)*.2*(reduce?0:1), 4.4 - e*1.7 - st.my*.6, startZ - e*24);
+    camera.lookAt(look);
+    U.uScan.value = U.uProgress.value >= 1 ? ((U.uTime.value*1.6) % 16) - 3 : -10;
+    const c = p < .3 ? 0 : p < .66 ? 1 : 2;
+    if (c !== active){ chapters[active].classList.remove("on"); chapters[c].classList.add("on"); active = c; }
+    const ht = Math.max(0, 1 - p*3.2);
+    heroText.style.opacity = ht; heroText.style.transform = `translateY(${(1-ht)*-30}px)`;
+    heroText.style.pointerEvents = ht < .2 ? "none" : "";
+    const gate = Math.min(1, Math.max(0, (st.p - .12) / .1)) * (U.uProgress.value > .85 ? 1 : 0);
+    const w = canvas.clientWidth, h = canvas.clientHeight;
+    labels.forEach(L=>{
+      tmp.copy(L.v).project(camera);
+      const dist = camera.position.distanceTo(L.v);
+      const inView = tmp.z < 1 && Math.abs(tmp.x) < .92 && tmp.y < .8 && tmp.y > -.75;
+      const o = inView ? gate * Math.min(1, Math.max(0, 1 - (dist - 9) / 9)) : 0;
+      L.el.style.opacity = o.toFixed(3); L.el.classList.toggle("flip", tmp.x > .3);
+      if (o > 0) L.el.style.transform = `translate(${((tmp.x+1)/2*w).toFixed(1)}px, ${((1-tmp.y)/2*h).toFixed(1)}px)`;
+    });
+    renderer.render(scene, camera);
+  }
+  requestAnimationFrame(frame);
+  if (!reduce){
+    const tween = { v:0 };
+    if (window.gsap) gsap.to(tween,{ v:1, duration:6.5, ease:"power1.inOut", delay:.3, onUpdate:()=>U.uProgress.value=tween.v });
+    else U.uProgress.value = 1;
+  }
+})();
+
+/* ---------- smooth scroll + reveals ---------- */
+let lenis = null;
+if (window.Lenis && !reduce){
+  lenis = new Lenis({ duration:1.25, smoothWheel:true });
+  if (window.gsap && window.ScrollTrigger){
+    gsap.registerPlugin(ScrollTrigger);
+    lenis.on("scroll", ScrollTrigger.update);
+    gsap.ticker.add(t=>lenis.raf(t*1000)); gsap.ticker.lagSmoothing(0);
+  } else { const raf=t=>{ lenis.raf(t); requestAnimationFrame(raf); }; requestAnimationFrame(raf); }
+}
+document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener("click", e=>{
+  const id = a.getAttribute("href"); const el = id === "#top" ? document.body : document.querySelector(id);
+  if (!el) return; e.preventDefault(); closeDrawer();
+  if (lenis) lenis.scrollTo(el, { offset: id==="#top"?0:-70 }); else el.scrollIntoView({ behavior: reduce?"auto":"smooth" });
+}));
+if (window.gsap && window.ScrollTrigger && !reduce){
+  gsap.registerPlugin(ScrollTrigger);
+  gsap.utils.toArray(".reveal").forEach(el=>{
+    gsap.from(el, { y:44, opacity:.15, duration:1.3, ease:"power3.out", scrollTrigger:{ trigger:el, start:"top 90%" } });
+  });
+  gsap.utils.toArray(".tile img").forEach(img=>{
+    gsap.fromTo(img, { yPercent:-4 }, { yPercent:4, ease:"none", scrollTrigger:{ trigger:img.closest(".tile"), scrub:true } });
+  });
+  gsap.fromTo(".film .poster img", { scale:1.15 }, { scale:1, ease:"none", scrollTrigger:{ trigger:".film", scrub:true } });
+}
+
+/* ---------- nav ---------- */
+const nav = document.getElementById("nav");
+const onScroll = ()=> nav.classList.toggle("scrolled", scrollY > innerHeight*.6);
+addEventListener("scroll", onScroll, { passive:true }); onScroll();
+const drawer = document.getElementById("drawer"), menuBtn = document.getElementById("menuBtn");
+function closeDrawer(){ drawer.hidden = true; menuBtn.setAttribute("aria-expanded","false"); }
+menuBtn.addEventListener("click", ()=>{ drawer.hidden = false; menuBtn.setAttribute("aria-expanded","true"); });
+document.getElementById("menuClose").addEventListener("click", closeDrawer);
+
+/* ---------- film: background video where embedding is allowed ---------- */
+(function film(){
+  const host = location.hostname;
+  const sandboxed = /claude|anthropic/.test(host) || window.self !== window.top || location.protocol === "file:";
+  if (sandboxed || reduce) return;
+  const box = document.getElementById("yt");
+  new IntersectionObserver((es,io)=>{
+    if (!es[0].isIntersecting) return; io.disconnect();
+    const f = document.createElement("iframe");
+    f.src = `https://www.youtube-nocookie.com/embed/${YT_ID}?autoplay=1&mute=1&loop=1&playlist=${YT_ID}&controls=0&playsinline=1&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1`;
+    f.allow = "autoplay; encrypted-media"; f.title = "HKNS Events film"; f.tabIndex = -1;
+    f.addEventListener("load", ()=>setTimeout(()=>box.classList.add("ready"), 1200));
+    box.appendChild(f);
+  }, { rootMargin:"300px" }).observe(box);
+})();
+
+/* ---------- gallery lightbox ---------- */
+const tiles = [...document.querySelectorAll(".tile")];
+const lb = document.getElementById("lightbox"), lbImg = document.getElementById("lbImg"), lbCap = document.getElementById("lbCap");
+let li = 0, lastFocus = null;
+function show(i){
+  li = (i + tiles.length) % tiles.length;
+  const img = tiles[li].querySelector("img");
+  lbImg.src = img.src.replace("-800.webp","-1600.webp"); lbImg.alt = img.alt;
+  lbCap.textContent = tiles[li].querySelector("b").textContent;
+}
+tiles.forEach((t,i)=>t.addEventListener("click", ()=>{ lastFocus = t; show(i); lb.hidden = false; lenis && lenis.stop(); document.getElementById("lbClose").focus(); }));
+function closeLb(){ lb.hidden = true; lenis && lenis.start(); lastFocus && lastFocus.focus(); }
+document.getElementById("lbClose").addEventListener("click", closeLb);
+document.getElementById("lbPrev").addEventListener("click", ()=>show(li-1));
+document.getElementById("lbNext").addEventListener("click", ()=>show(li+1));
+lb.addEventListener("click", e=>{ if (e.target === lb) closeLb(); });
+addEventListener("keydown", e=>{
+  if (lb.hidden) return;
+  if (e.key === "Escape") closeLb(); if (e.key === "ArrowLeft") show(li-1); if (e.key === "ArrowRight") show(li+1);
+});
+
+/* ---------- services preview ---------- */
+const svcImgs = ["ivory-floral-arch","gold-mandap","gilded-lattice-stage","crimson-ceremony","mehndi-in-bloom","blush-floral-wall","crystal-ballroom"];
+const prev = document.getElementById("svcPreview"), cap = document.getElementById("svcCap");
+const pImgs = svcImgs.map((n,i)=>{ if (i===2) return prev.querySelector("img"); const im = new Image(); im.src = `images/${n}-800.webp`; im.alt = ""; im.loading = "lazy"; prev.insertBefore(im, cap); return im; });
+document.querySelectorAll(".svc").forEach(b=>{
+  const act = ()=>{
+    document.querySelectorAll(".svc").forEach(x=>x.classList.toggle("on", x===b));
+    pImgs.forEach((im,i)=>im.classList.toggle("on", i === +b.dataset.img));
+    cap.textContent = b.querySelector("b").textContent;
+  };
+  b.addEventListener("mouseenter", act); b.addEventListener("focus", act); b.addEventListener("click", act);
+});
+
+/* ---------- reviews ---------- */
+const quotes = [...document.querySelectorAll(".quote")], qCount = document.getElementById("qCount");
+let qi = 0, qTimer;
+function q(i){ quotes[qi].classList.remove("on"); qi = (i + quotes.length) % quotes.length; quotes[qi].classList.add("on"); qCount.textContent = `${qi+1} / ${quotes.length}`; }
+function auto(){ clearInterval(qTimer); if (!reduce) qTimer = setInterval(()=>q(qi+1), 8000); }
+document.getElementById("qPrev").addEventListener("click", ()=>{ q(qi-1); auto(); });
+document.getElementById("qNext").addEventListener("click", ()=>{ q(qi+1); auto(); });
+auto();
+
+/* ---------- copy + form ---------- */
+document.querySelectorAll(".copy-btn").forEach(b=>b.addEventListener("click", ()=>{
+  const t = b.dataset.copy;
+  const done = ()=>{ b.textContent = "Copied"; setTimeout(()=>b.textContent = "Copy", 1600); };
+  if (navigator.clipboard) navigator.clipboard.writeText(t).then(done, ()=>{ const r = document.createRange(); r.selectNodeContents(b.previousElementSibling); getSelection().removeAllRanges(); getSelection().addRange(r); });
+}));
+const form = document.getElementById("inquiry"), status = document.getElementById("status");
+form.addEventListener("submit", async e=>{
+  e.preventDefault();
+  const fd = new FormData(form);
+  if (!fd.get("name") || !/^\S+@\S+\.\S+$/.test(fd.get("email") || "")){ status.textContent = "Please add your name and a valid email so we can reach you."; return; }
+  if (FORM_ENDPOINT){
+    status.textContent = "Sending…";
+    try {
+      const r = await fetch(FORM_ENDPOINT, { method:"POST", body:fd, headers:{ Accept:"application/json" } });
+      if (!r.ok) throw 0;
+      form.reset(); status.textContent = "Thank you. We will be in touch shortly to schedule your showroom tour.";
+    } catch(_) { status.textContent = "That didn't go through. Please email hknsevents@gmail.com or call (630) 229-1402."; }
+    return;
+  }
+  const lines = [...fd.entries()].filter(([,v])=>v).map(([k,v])=>`${k[0].toUpperCase()+k.slice(1)}: ${v}`).join("\n");
+  location.href = `mailto:hknsevents@gmail.com?subject=${encodeURIComponent("Showroom tour inquiry · " + fd.get("name"))}&body=${encodeURIComponent(lines)}`;
+  status.textContent = "Your email app should open with these details. If it doesn't, write to hknsevents@gmail.com.";
+});
+</script>
+</body>
+</html>
