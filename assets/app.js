@@ -779,6 +779,10 @@ const venue = (function(){
   requestAnimationFrame(frame);
 })();
 
+/* ---------- open at the top, not wherever the browser last left the page ---------- */
+if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+if (!location.hash) scrollTo(0, 0);
+
 /* ---------- smooth scroll and in-page links ---------- */
 let lenis = null;
 if (window.Lenis && !reduce && !mobile){
@@ -891,30 +895,45 @@ document.querySelectorAll(".copy-btn").forEach(b=>b.addEventListener("click", ()
   if (navigator.clipboard) navigator.clipboard.writeText(b.dataset.copy).then(done, select); else select();
 }));
 
-/* ---------- ratings and Instagram line: one message at a time ---------- */
-(function rotator(){
-  const items = [...document.querySelectorAll("#rot .rot-i")];
-  if (items.length < 2) return;
-  let i = 0, paused = false;
-  const show = k=>items.forEach((el,j)=>{ const on = j === k; el.classList.toggle("on", on); el.tabIndex = on ? 0 : -1; el.setAttribute("aria-hidden", on ? "false" : "true"); });
-  const box = document.getElementById("rot");
-  ["mouseenter","focusin"].forEach(ev=>box.addEventListener(ev, ()=>paused = true));
-  ["mouseleave","focusout"].forEach(ev=>box.addEventListener(ev, ()=>paused = false));
-  show(0);
-  setInterval(()=>{ if (!paused && !document.hidden){ i = (i + 1) % items.length; show(i); } }, 3600);
-})();
-
 /* ---------- grand opening: hides itself after the event; delete the marked blocks to remove it ---------- */
 if (Date.now() > Date.parse("2026-11-16T01:00:00Z")) document.querySelectorAll("[data-grand-opening]").forEach(el=>el.remove());
+(function notice(){
+  const n = document.getElementById("notice");
+  if (!n) return;
+  const KEY = "hkns-grand-opening-dismissed";
+  let gone = false;
+  try { gone = localStorage.getItem(KEY) === "1"; } catch(e){}
+  if (gone) return;
+  const hide = remember=>{ n.classList.remove("in"); setTimeout(()=>n.hidden = true, 600); if (remember){ try { localStorage.setItem(KEY, "1"); } catch(e){} } };
+  setTimeout(()=>{ n.hidden = false; requestAnimationFrame(()=>requestAnimationFrame(()=>n.classList.add("in"))); }, 1800);
+  setTimeout(()=>{ if (!n.matches(":hover") && !n.contains(document.activeElement)) hide(false); }, 16000);
+  document.getElementById("noticeX").addEventListener("click", ()=>hide(true));
+  n.querySelector(".notice-go").addEventListener("click", ()=>hide(true));
+})();
 
 /* ---------- the 3D walk. With a mouse or trackpad it moves one step per scroll gesture, so momentum can't
    carry you past a step, and a gesture past the first or last step lets you out. On phones scrolling stays
-   native, and the steps are gentle snap points (html.snap in the stylesheet) ---------- */
+   native and only eases onto a step when you stop close to one (CSS scroll snapping eats taps on iOS) ---------- */
 (function walkSteps(){
   const walk = document.getElementById("process"), next = document.getElementById("showroom");
   if (!walk || !next || reduce) return;
-  if (!lenis){ document.documentElement.classList.add("snap"); return; }
   const STOPS = [.08, .335, .605, .87];
+  if (!lenis){
+    let touching = false, t = 0;
+    const g0 = ()=>{ const top = walk.offsetTop, span = Math.max(1, walk.offsetHeight - innerHeight); return { top, span, end: top + span }; };
+    const arm = ()=>{ clearTimeout(t); t = setTimeout(()=>{
+      const g = g0(), y = scrollY;
+      if (touching || y < g.top || y > g.end) return;
+      let best = STOPS[0];
+      for (const f of STOPS) if (Math.abs(y - (g.top + g.span*f)) < Math.abs(y - (g.top + g.span*best))) best = f;
+      const d = Math.abs(y - (g.top + g.span*best));
+      if (d > 6 && d < g.span*.09) window.scrollTo({ top: g.top + g.span*best, behavior: "smooth" });
+    }, 280); };
+    addEventListener("touchstart", ()=>{ touching = true; clearTimeout(t); }, { passive: true });
+    addEventListener("touchend", ()=>{ touching = false; arm(); }, { passive: true });
+    addEventListener("scroll", ()=>{ if (!touching) arm(); }, { passive: true });
+    return;
+  }
   const geo = ()=>{ const top = walk.offsetTop, span = Math.max(1, walk.offsetHeight - innerHeight); return { top, end: top + span, at: b=>top + span*STOPS[b] }; };
   const beatNow = ()=>{ const el = walk.querySelector(".beat.on"); return el ? +el.dataset.b : 0; };
   const inside = ()=>{ const g = geo(); return scrollY > g.top - 2 && scrollY < g.end + 2; };
