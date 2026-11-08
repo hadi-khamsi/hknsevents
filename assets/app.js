@@ -818,7 +818,8 @@ document.querySelectorAll('a[href^="#"]:not(.skip)').forEach(a=>a.addEventListen
 
 /* ---------- nav and menu ---------- */
 const nav = document.getElementById("nav");
-const onScroll = ()=> nav.classList.toggle("scrolled", scrollY > innerHeight*.5);
+const toTop = document.getElementById("toTop");
+const onScroll = ()=>{ nav.classList.toggle("scrolled", scrollY > innerHeight*.5); if (toTop) toTop.classList.toggle("on", scrollY > innerHeight*1.2); };
 addEventListener("scroll", onScroll, { passive:true }); onScroll();
 const drawer = document.getElementById("drawer"), menuBtn = document.getElementById("menuBtn");
 function closeDrawer(){ if (drawer.hidden) return; drawer.hidden = true; menuBtn.setAttribute("aria-expanded","false"); lenis && lenis.start(); }
@@ -900,14 +901,13 @@ if (Date.now() > Date.parse("2026-11-16T01:00:00Z")) document.querySelectorAll("
 (function notice(){
   const n = document.getElementById("notice");
   if (!n) return;
-  const KEY = "hkns-grand-opening-dismissed";
+  const KEY = "hkns-grand-opening-closed";
   let gone = false;
   try { gone = localStorage.getItem(KEY) === "1"; } catch(e){}
   if (gone) return;
   const hide = remember=>{ n.classList.remove("in"); setTimeout(()=>n.hidden = true, 600); if (remember){ try { localStorage.setItem(KEY, "1"); } catch(e){} } };
   setTimeout(()=>{ n.hidden = false; requestAnimationFrame(()=>requestAnimationFrame(()=>n.classList.add("in"))); }, 1800);
   document.getElementById("noticeX").addEventListener("click", ()=>hide(true));
-  n.querySelector(".notice-go").addEventListener("click", ()=>hide(true));
 })();
 
 /* ---------- the 3D walk. With a mouse or trackpad it moves one step per scroll gesture, so momentum can't
