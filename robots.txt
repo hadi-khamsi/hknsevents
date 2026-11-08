@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://hadi-khamsi.github.io/hknsevents/sitemap.xml
+Sitemap: https://hknsevents.com/sitemap.xml
