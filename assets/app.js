@@ -835,7 +835,7 @@ addEventListener("keydown", e=>{ if (e.key === "Escape" && !drawer.hidden){ clos
   };
   items.forEach((it,i)=>{
     it.querySelector(".svc-btn").addEventListener("click", ()=>{
-      if (it.classList.contains("on") && mobile){ it.classList.remove("on"); it.querySelector(".svc-btn").setAttribute("aria-expanded","false"); }
+      if (it.classList.contains("on")){ it.classList.remove("on"); it.querySelector(".svc-btn").setAttribute("aria-expanded","false"); }
       else open(i);
     });
     if (!mobile) it.addEventListener("mouseenter", ()=>open(i));
@@ -906,7 +906,6 @@ if (Date.now() > Date.parse("2026-11-16T01:00:00Z")) document.querySelectorAll("
   if (gone) return;
   const hide = remember=>{ n.classList.remove("in"); setTimeout(()=>n.hidden = true, 600); if (remember){ try { localStorage.setItem(KEY, "1"); } catch(e){} } };
   setTimeout(()=>{ n.hidden = false; requestAnimationFrame(()=>requestAnimationFrame(()=>n.classList.add("in"))); }, 1800);
-  setTimeout(()=>{ if (!n.matches(":hover") && !n.contains(document.activeElement)) hide(false); }, 16000);
   document.getElementById("noticeX").addEventListener("click", ()=>hide(true));
   n.querySelector(".notice-go").addEventListener("click", ()=>hide(true));
 })();
@@ -919,19 +918,48 @@ if (Date.now() > Date.parse("2026-11-16T01:00:00Z")) document.querySelectorAll("
   if (!walk || !next || reduce) return;
   const STOPS = [.08, .335, .605, .87];
   if (!lenis){
-    let touching = false, t = 0;
-    const g0 = ()=>{ const top = walk.offsetTop, span = Math.max(1, walk.offsetHeight - innerHeight); return { top, span, end: top + span }; };
-    const arm = ()=>{ clearTimeout(t); t = setTimeout(()=>{
+    /* phones: your finger moves the page freely, but a fling's glide stops at the next step,
+       so a hard swipe moves one step and four or five swipes take you through */
+    const g0 = ()=>{ const top = walk.offsetTop, span = Math.max(1, walk.offsetHeight - innerHeight); return { top, span, end: top + span, at: b=>top + span*STOPS[b] }; };
+    const root = document.documentElement;
+    let touching = false, startY = 0, cap = null, dir = 0, t = 0;
+    let holding = false;
+    const hold = y=>{
+      cap = null; holding = true;
+      root.style.overflow = "hidden"; document.body.style.overflow = "hidden";   /* ends the glide */
+      window.scrollTo({ top: y, behavior: "instant" });
+      setTimeout(()=>{ root.style.overflow = ""; document.body.style.overflow = ""; holding = false; window.scrollTo({ top: y, behavior: "instant" }); }, 140);
+    };
+    /* the next step past where you let go, in the direction you were moving (null = free to leave the walk) */
+    const nextStop = (y, d)=>{
+      const g = g0();
+      if (d > 0){ for (let b=0;b<4;b++) if (g.at(b) > y + 8) return y < g.end + 8 ? g.at(b) : null; return null; }
+      for (let b=3;b>=0;b--) if (g.at(b) < y - 8) return y > g.top - 8 ? g.at(b) : null; return null;
+    };
+    const settle = ()=>{ clearTimeout(t); t = setTimeout(()=>{
       const g = g0(), y = scrollY;
       if (touching || y < g.top || y > g.end) return;
-      let best = STOPS[0];
-      for (const f of STOPS) if (Math.abs(y - (g.top + g.span*f)) < Math.abs(y - (g.top + g.span*best))) best = f;
-      const d = Math.abs(y - (g.top + g.span*best));
-      if (d > 6 && d < g.span*.09) window.scrollTo({ top: g.top + g.span*best, behavior: "smooth" });
-    }, 280); };
-    addEventListener("touchstart", ()=>{ touching = true; clearTimeout(t); }, { passive: true });
-    addEventListener("touchend", ()=>{ touching = false; arm(); }, { passive: true });
-    addEventListener("scroll", ()=>{ if (!touching) arm(); }, { passive: true });
+      let best = 0; for (let b=1;b<4;b++) if (Math.abs(y - g.at(b)) < Math.abs(y - g.at(best))) best = b;
+      const d = Math.abs(y - g.at(best));
+      if (d > 6 && d < g.span*.14) window.scrollTo({ top: g.at(best), behavior: "smooth" });
+    }, 300); };
+    addEventListener("touchstart", ()=>{ touching = true; cap = null; clearTimeout(t); startY = scrollY; }, { passive: true });
+    addEventListener("touchend", ()=>{
+      touching = false;
+      const moved = scrollY - startY;
+      dir = Math.abs(moved) > 6 ? Math.sign(moved) : 0;
+      if (dir){
+        const g = g0(), y = scrollY;
+        /* only when the glide could run through the walk: above it going down, inside it, or below it going up */
+        if ((dir > 0 && y < g.end + 8 && y > g.top - innerHeight*1.5) || (dir < 0 && y > g.top - 8 && y < g.end + innerHeight*1.5)) cap = nextStop(y, dir);
+      }
+      settle();
+    }, { passive: true });
+    addEventListener("scroll", ()=>{
+      if (holding) return;
+      if (!touching && cap != null && ((dir > 0 && scrollY > cap + 2) || (dir < 0 && scrollY < cap - 2))) hold(cap);
+      if (!touching) settle();
+    }, { passive: true });
     return;
   }
   const geo = ()=>{ const top = walk.offsetTop, span = Math.max(1, walk.offsetHeight - innerHeight); return { top, end: top + span, at: b=>top + span*STOPS[b] }; };
