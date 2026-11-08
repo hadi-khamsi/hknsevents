@@ -891,14 +891,29 @@ document.querySelectorAll(".copy-btn").forEach(b=>b.addEventListener("click", ()
   if (navigator.clipboard) navigator.clipboard.writeText(b.dataset.copy).then(done, select); else select();
 }));
 
+/* ---------- ratings and Instagram line: one message at a time ---------- */
+(function rotator(){
+  const items = [...document.querySelectorAll("#rot .rot-i")];
+  if (items.length < 2) return;
+  let i = 0, paused = false;
+  const show = k=>items.forEach((el,j)=>{ const on = j === k; el.classList.toggle("on", on); el.tabIndex = on ? 0 : -1; el.setAttribute("aria-hidden", on ? "false" : "true"); });
+  const box = document.getElementById("rot");
+  ["mouseenter","focusin"].forEach(ev=>box.addEventListener(ev, ()=>paused = true));
+  ["mouseleave","focusout"].forEach(ev=>box.addEventListener(ev, ()=>paused = false));
+  show(0);
+  setInterval(()=>{ if (!paused && !document.hidden){ i = (i + 1) % items.length; show(i); } }, 3600);
+})();
+
 /* ---------- grand opening: hides itself after the event; delete the marked blocks to remove it ---------- */
 if (Date.now() > Date.parse("2026-11-16T01:00:00Z")) document.querySelectorAll("[data-grand-opening]").forEach(el=>el.remove());
 
-/* ---------- the 3D walk: one step per scroll gesture. Each step holds until the next gesture,
-   a trackpad's momentum can't carry you past one, and a gesture past the first or last step lets you out ---------- */
+/* ---------- the 3D walk. With a mouse or trackpad it moves one step per scroll gesture, so momentum can't
+   carry you past a step, and a gesture past the first or last step lets you out. On phones scrolling stays
+   native, and the steps are gentle snap points (html.snap in the stylesheet) ---------- */
 (function walkSteps(){
   const walk = document.getElementById("process"), next = document.getElementById("showroom");
   if (!walk || !next || reduce) return;
+  if (!lenis){ document.documentElement.classList.add("snap"); return; }
   const STOPS = [.08, .335, .605, .87];
   const geo = ()=>{ const top = walk.offsetTop, span = Math.max(1, walk.offsetHeight - innerHeight); return { top, end: top + span, at: b=>top + span*STOPS[b] }; };
   const beatNow = ()=>{ const el = walk.querySelector(".beat.on"); return el ? +el.dataset.b : 0; };
@@ -909,8 +924,7 @@ if (Date.now() > Date.parse("2026-11-16T01:00:00Z")) document.querySelectorAll("
   function go(y, dur){
     busy = true;
     const done = ()=>{ busy = false; prevY = scrollY; settleSoon(); };
-    if (lenis) lenis.scrollTo(y, { duration: dur || 1.1, lock: true, force: true, onComplete: done });
-    else { window.scrollTo({ top: y, behavior: "smooth" }); setTimeout(done, (dur || 1.1)*1000 + 150); }
+    lenis.scrollTo(y, { duration: dur || 1, lock: true, force: true, onComplete: done });
   }
   function step(dir){
     const g = geo(), b = beatNow();
@@ -948,16 +962,6 @@ if (Date.now() > Date.parse("2026-11-16T01:00:00Z")) document.querySelectorAll("
     }
     prevY = y;
     settleSoon();
-  }, { passive: true });
-  /* phones: a swipe is one step */
-  let ty = null, tx = 0;
-  addEventListener("touchstart", e=>{ ty = e.touches[0].clientY; tx = e.touches[0].clientX; }, { passive: true });
-  addEventListener("touchmove", e=>{ if (e.touches.length === 1 && inside() && !blocked(e.target)) e.preventDefault(); }, { passive: false });
-  addEventListener("touchend", e=>{
-    if (ty == null) return;
-    const dy = ty - e.changedTouches[0].clientY, dx = tx - e.changedTouches[0].clientX; ty = null;
-    if (!inside() || busy || blocked(e.target) || Math.abs(dy) < 28 || Math.abs(dy) < Math.abs(dx)) return;
-    step(dy > 0 ? 1 : -1);
   }, { passive: true });
   addEventListener("keydown", e=>{
     if (!inside() || blocked(e.target) || (e.target.closest && e.target.closest("input,textarea,select"))) return;
