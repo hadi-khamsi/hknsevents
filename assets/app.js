@@ -533,7 +533,7 @@ const venue = (function(){
   }
   const offset=(pts,o)=>pts.map((p,i)=>{ const a=pts[Math.max(0,i-1)], b=pts[Math.min(pts.length-1,i+1)], tx=b[0]-a[0], tz=b[1]-a[1], l=Math.hypot(tx,tz)||1; return [p[0]-tz/l*o, p[1]+tx/l*o]; });
   const road=(pts,w,ink,step)=>{ line(offset(pts,w/2),ink,step); line(offset(pts,-w/2),ink,step); };
-  const INK={ street:[.36,.3,.25,.24], avenue:[.3,.24,.2,.46], expressway:[.6,.45,.24,.72], rail:[.3,.25,.22,.42], bank:[.36,.43,.47,.46], building:[.34,.28,.24,.3], route:[.46,.34,.18,.9], ring:[.46,.34,.18,.5] };
+  const INK={ street:[.36,.3,.25,.24], avenue:[.3,.24,.2,.46], expressway:[.6,.45,.24,.72], rail:[.3,.25,.22,.42], bank:[.36,.43,.47,.46], building:[.34,.28,.24,.3], route:[.36,.1,.15,.85], ring:[.36,.1,.15,.5] };
   const hash=(i,j)=>{ const s=Math.sin(i*127.1+j*311.7)*43758.5453; return s-Math.floor(s); };
 
   /* a mile grid of avenues; side streets and building footprints inside each square */
@@ -893,3 +893,76 @@ document.querySelectorAll(".copy-btn").forEach(b=>b.addEventListener("click", ()
 
 /* ---------- grand opening: hides itself after the event; delete the marked blocks to remove it ---------- */
 if (Date.now() > Date.parse("2026-11-16T01:00:00Z")) document.querySelectorAll("[data-grand-opening]").forEach(el=>el.remove());
+
+/* ---------- the 3D walk: one step per scroll gesture. Each step holds until the next gesture,
+   a trackpad's momentum can't carry you past one, and a gesture past the first or last step lets you out ---------- */
+(function walkSteps(){
+  const walk = document.getElementById("process"), next = document.getElementById("showroom");
+  if (!walk || !next || reduce) return;
+  const STOPS = [.08, .335, .605, .87];
+  const geo = ()=>{ const top = walk.offsetTop, span = Math.max(1, walk.offsetHeight - innerHeight); return { top, end: top + span, at: b=>top + span*STOPS[b] }; };
+  const beatNow = ()=>{ const el = walk.querySelector(".beat.on"); return el ? +el.dataset.b : 0; };
+  const inside = ()=>{ const g = geo(); return scrollY > g.top - 2 && scrollY < g.end + 2; };
+  const blocked = t=>!drawer.hidden || !lb.hidden || (t && t.closest && t.closest(".drawer,.lightbox"));
+  let busy = false, prevY = scrollY, last = 0;
+  const recent = [];
+  function go(y, dur){
+    busy = true;
+    const done = ()=>{ busy = false; prevY = scrollY; settleSoon(); };
+    if (lenis) lenis.scrollTo(y, { duration: dur || 1.1, lock: true, force: true, onComplete: done });
+    else { window.scrollTo({ top: y, behavior: "smooth" }); setTimeout(done, (dur || 1.1)*1000 + 150); }
+  }
+  function step(dir){
+    const g = geo(), b = beatNow();
+    if (dir > 0) go(b < 3 ? g.at(b+1) : next.offsetTop);
+    else go(b > 0 ? g.at(b-1) : 0);
+  }
+  /* a new gesture is a wheel event after a pause, or one clearly stronger than the momentum before it */
+  addEventListener("wheel", e=>{
+    const now = performance.now(), a = Math.abs(e.deltaY), quiet = now - last > 220;
+    const avg = recent.length ? recent.reduce((x,y)=>x+y, 0)/recent.length : 0;
+    const rising = !quiet && recent.length >= 2 && a > avg*1.8 && a > 14;
+    last = now; if (quiet) recent.length = 0; recent.push(a); if (recent.length > 4) recent.shift();
+    if (!inside() || blocked(e.target)) return;
+    e.preventDefault(); e.stopImmediatePropagation();
+    if (busy || a < 2 || !(quiet || rising)) return;
+    step(e.deltaY > 0 ? 1 : -1);
+  }, { capture: true, passive: false });
+  /* arriving from above or below settles on the first or last step; anything that comes to rest
+     between steps (a phone fling, a dragged scrollbar) settles on the nearest one */
+  let settle = 0;
+  function settleSoon(){
+    clearTimeout(settle);
+    settle = setTimeout(()=>{
+      if (busy || !inside()) return;
+      const g = geo(); let best = 0;
+      for (let b=1;b<4;b++) if (Math.abs(scrollY - g.at(b)) < Math.abs(scrollY - g.at(best))) best = b;
+      if (Math.abs(scrollY - g.at(best)) > 6) go(g.at(best), .6);
+    }, 160);
+  }
+  addEventListener("scroll", ()=>{
+    const y = scrollY, g = geo();
+    if (!busy){
+      if (prevY < g.top - 2 && y >= g.top - 2 && y < g.end) go(g.at(0), .9);
+      else if (prevY > g.end + 2 && y <= g.end + 2 && y > g.top) go(g.at(3), .9);
+    }
+    prevY = y;
+    settleSoon();
+  }, { passive: true });
+  /* phones: a swipe is one step */
+  let ty = null, tx = 0;
+  addEventListener("touchstart", e=>{ ty = e.touches[0].clientY; tx = e.touches[0].clientX; }, { passive: true });
+  addEventListener("touchmove", e=>{ if (e.touches.length === 1 && inside() && !blocked(e.target)) e.preventDefault(); }, { passive: false });
+  addEventListener("touchend", e=>{
+    if (ty == null) return;
+    const dy = ty - e.changedTouches[0].clientY, dx = tx - e.changedTouches[0].clientX; ty = null;
+    if (!inside() || busy || blocked(e.target) || Math.abs(dy) < 28 || Math.abs(dy) < Math.abs(dx)) return;
+    step(dy > 0 ? 1 : -1);
+  }, { passive: true });
+  addEventListener("keydown", e=>{
+    if (!inside() || blocked(e.target) || (e.target.closest && e.target.closest("input,textarea,select"))) return;
+    const k = e.key, down = k === "ArrowDown" || k === "PageDown" || (k === " " && !e.shiftKey), up = k === "ArrowUp" || k === "PageUp" || (k === " " && e.shiftKey);
+    if (!down && !up) return;
+    e.preventDefault(); if (!busy) step(down ? 1 : -1);
+  });
+})();
