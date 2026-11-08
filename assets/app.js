@@ -899,15 +899,12 @@ document.querySelectorAll(".copy-btn").forEach(b=>b.addEventListener("click", ()
 /* ---------- grand opening: hides itself after the event; delete the marked blocks to remove it ---------- */
 if (Date.now() > Date.parse("2026-11-16T01:00:00Z")) document.querySelectorAll("[data-grand-opening]").forEach(el=>el.remove());
 (function notice(){
+  /* closing it hides it for this visit only; it comes back on the next page load */
   const n = document.getElementById("notice");
   if (!n) return;
-  const KEY = "hkns-grand-opening-closed";
-  let gone = false;
-  try { gone = localStorage.getItem(KEY) === "1"; } catch(e){}
-  if (gone) return;
-  const hide = remember=>{ n.classList.remove("in"); setTimeout(()=>n.hidden = true, 600); if (remember){ try { localStorage.setItem(KEY, "1"); } catch(e){} } };
+  const hide = ()=>{ n.classList.remove("in"); setTimeout(()=>n.hidden = true, 600); };
   setTimeout(()=>{ n.hidden = false; requestAnimationFrame(()=>requestAnimationFrame(()=>n.classList.add("in"))); }, 1800);
-  document.getElementById("noticeX").addEventListener("click", ()=>hide(true));
+  document.getElementById("noticeX").addEventListener("click", hide);
 })();
 
 /* ---------- the 3D walk. With a mouse or trackpad it moves one step per scroll gesture, so momentum can't
