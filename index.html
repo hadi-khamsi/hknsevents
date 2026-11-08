@@ -402,5 +402,13 @@
 <script src="vendor/three.min.js" defer></script>
 <script src="vendor/lenis.min.js" defer></script>
 <script src="assets/app.js?v=e991c11c" defer></script>
+<script>
+/* if this copy of the page is older than the live one, load the live one */
+(function(){var V="56c53804";
+if(/[?&]v=/.test(location.search))history.replaceState(null,"",location.pathname+location.hash);
+function chk(){fetch("version.txt?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.text():""}).then(function(t){t=t.trim();if(!/^[0-9a-f]{8}$/.test(t)||t===V)return;try{if(sessionStorage.getItem("hkns-v")===t)return;sessionStorage.setItem("hkns-v",t)}catch(e){}location.replace(location.pathname+"?v="+t+location.hash)}).catch(function(){})}
+chk();addEventListener("pageshow",function(e){if(e.persisted)chk()});document.addEventListener("visibilitychange",function(){if(document.visibilityState==="visible")chk()});
+})();
+</script>
 </body>
 </html>
