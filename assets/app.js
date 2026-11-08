@@ -682,7 +682,7 @@ const venue = (function(){
     }
     let da = ob.a - oa.a; da = Math.atan2(Math.sin(da), Math.cos(da));
     const rTop = Math.max(oa.r, ob.r);
-    return { t:0, dur: Math.min(2.6, Math.max(1.4, Math.abs(S)*.8)), at(t){
+    return { t:0, dur: Math.min(1.7, Math.max(.9, Math.abs(S)*.52)), at(t){
       const [u, w] = path(t), r = w/wk, f = clamp(u), lift = sm(1, 2.4, r/rTop);
       const e = lerp(lerp(oa.e, ob.e, f), 1.05, lift), a = oa.a + da*f, c = Math.cos(e)*r;
       const T = [A.l[0] + dx*u, lerp(A.l[1], B.l[1], f), A.l[2] + dz*u];
@@ -739,7 +739,7 @@ const venue = (function(){
     G.venue.u.uProgress.value = introDone ? vb : Math.min(intro, vb);
     G.show.u.uProgress.value = sb; G.map.u.uProgress.value = mb;
 
-    const k = reduce ? 1 : 1 - Math.exp(-dt*(inWalk || fl ? 6 : 3.4));
+    const k = reduce ? 1 : 1 - Math.exp(-dt*(inWalk || fl ? 7.5 : 3.4));
     for (let j=0;j<3;j++){ cur.p[j] += (goal.p[j]-cur.p[j])*k; cur.l[j] += (goal.l[j]-cur.l[j])*k; }
     cur.x += (goal.x-cur.x)*k; cur.y += (goal.y-cur.y)*k;
     const km = 1 - Math.exp(-dt*2.4); mouse.x += (mouse.tx-mouse.x)*km; mouse.y += (mouse.ty-mouse.y)*km;
@@ -938,17 +938,24 @@ if (Date.now() > Date.parse("2026-11-16T01:00:00Z")) document.querySelectorAll("
   const beatNow = ()=>{ const el = walk.querySelector(".beat.on"); return el ? +el.dataset.b : 0; };
   const inside = ()=>{ const g = geo(); return scrollY > g.top - 2 && scrollY < g.end + 2; };
   const blocked = t=>!drawer.hidden || !lb.hidden || (t && t.closest && t.closest(".drawer,.lightbox"));
-  let busy = false, prevY = scrollY, last = 0;
+  /* aim is the step being moved to (-1 = leaving up to the hero, 4 = leaving down to the showroom).
+     A new gesture during a move goes on from there right away instead of waiting for the move to end. */
+  let busy = false, prevY = scrollY, last = 0, aim = 0, run = 0, lastStep = 0;
   const recent = [];
-  function go(y, dur){
-    busy = true;
-    const done = ()=>{ busy = false; prevY = scrollY; settleSoon(); };
-    lenis.scrollTo(y, { duration: dur || 1, lock: true, force: true, onComplete: done });
+  function go(y, dur, to){
+    busy = true; aim = to; const id = ++run;
+    lenis.scrollTo(y, { duration: dur || .65, lock: true, force: true, onComplete: ()=>{ if (id !== run) return; busy = false; prevY = scrollY; settleSoon(); } });
   }
   function step(dir){
-    const g = geo(), b = beatNow();
-    if (dir > 0) go(b < 3 ? g.at(b+1) : next.offsetTop);
-    else go(b > 0 ? g.at(b-1) : 0);
+    const now = performance.now();
+    if (now - lastStep < 240) return;
+    const base = busy ? aim : beatNow(), to = base + dir;
+    if (to === base || base < 0 || base > 3) return;
+    lastStep = now;
+    const g = geo();
+    if (to > 3) go(next.offsetTop, .75, 4);
+    else if (to < 0) go(0, .75, -1);
+    else go(g.at(to), .65, to);
   }
   /* a new gesture is a wheel event after a pause, or one clearly stronger than the momentum before it */
   addEventListener("wheel", e=>{
@@ -958,7 +965,7 @@ if (Date.now() > Date.parse("2026-11-16T01:00:00Z")) document.querySelectorAll("
     last = now; if (quiet) recent.length = 0; recent.push(a); if (recent.length > 4) recent.shift();
     if (!inside() || blocked(e.target)) return;
     e.preventDefault(); e.stopImmediatePropagation();
-    if (busy || a < 2 || !(quiet || rising)) return;
+    if (a < 2 || !(quiet || rising)) return;
     step(e.deltaY > 0 ? 1 : -1);
   }, { capture: true, passive: false });
   /* arriving from above or below settles on the first or last step; anything that comes to rest
@@ -970,14 +977,14 @@ if (Date.now() > Date.parse("2026-11-16T01:00:00Z")) document.querySelectorAll("
       if (busy || !inside()) return;
       const g = geo(); let best = 0;
       for (let b=1;b<4;b++) if (Math.abs(scrollY - g.at(b)) < Math.abs(scrollY - g.at(best))) best = b;
-      if (Math.abs(scrollY - g.at(best)) > 6) go(g.at(best), .6);
+      if (Math.abs(scrollY - g.at(best)) > 6) go(g.at(best), .5, best);
     }, 160);
   }
   addEventListener("scroll", ()=>{
     const y = scrollY, g = geo();
     if (!busy){
-      if (prevY < g.top - 2 && y >= g.top - 2 && y < g.end) go(g.at(0), .9);
-      else if (prevY > g.end + 2 && y <= g.end + 2 && y > g.top) go(g.at(3), .9);
+      if (prevY < g.top - 2 && y >= g.top - 2 && y < g.end) go(g.at(0), .6, 0);
+      else if (prevY > g.end + 2 && y <= g.end + 2 && y > g.top) go(g.at(3), .6, 3);
     }
     prevY = y;
     settleSoon();
@@ -986,6 +993,6 @@ if (Date.now() > Date.parse("2026-11-16T01:00:00Z")) document.querySelectorAll("
     if (!inside() || blocked(e.target) || (e.target.closest && e.target.closest("input,textarea,select"))) return;
     const k = e.key, down = k === "ArrowDown" || k === "PageDown" || (k === " " && !e.shiftKey), up = k === "ArrowUp" || k === "PageUp" || (k === " " && e.shiftKey);
     if (!down && !up) return;
-    e.preventDefault(); if (!busy) step(down ? 1 : -1);
+    e.preventDefault(); step(down ? 1 : -1);
   });
 })();
